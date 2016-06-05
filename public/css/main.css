@@ -1741,7 +1741,7 @@ a {
 #admin_page #content div.item_edit_container {
   position: absolute;
   top: 35px;
-  bottom: 0;
+  bottom: auto;
   right: 0;
   width: 285px;
   overflow: hidden;
