@@ -532,6 +532,8 @@
 	};
 
 	var editors = {};
+	var reset = false;
+	var activeEditor = null;
 
 	/**
 	 * The wysiwyg binding makes the field a ckeditor wysiwyg
@@ -539,12 +541,75 @@
 	ko.bindingHandlers.wysiwyg = {
 		init: function (element, valueAccessor, allBindingsAccessor, context)
 		{
-			
+			var options = valueAccessor(),
+				value = ko.utils.unwrapObservable(options.value),
+				$element = $(element),
+				editor;
+
+			value = value ? value : '';
+
+			$element.html(value);
+
+			if (options.id in editors)
+				editor = editors[options.id];
+			else
+			{
+				if(value == ""){
+					$element.ckeditor({
+						language : language,
+						readOnly : !adminData.edit_fields[context.field_name].editable
+					});
+
+					editor = $element.ckeditorGet();
+					editors[options.id] = editor;
+				}
+			}
+
+			if(value == ""){
+
+				// when the editor is loaded, we want to resize our page
+				editor.on('loaded', function()
+				{
+					setTimeout(function()
+					{
+						window.admin.resizePage();
+					}, 50);
+
+					editor.on('resize', function()
+					{
+						window.admin.resizePage();
+					});
+				});
+
+				// wire up the blur event to ensure our observable is properly updated
+				editor.focusManager.blur = function()
+				{
+					var observable = valueAccessor().value,
+						$el = $('#' + options.id);
+
+					//set the blur attribute to true so we know now to set the editor data in the update method
+					$el.data('blur', true);
+
+					observable($el.val());
+				}
+
+				// handle destroying an editor (based on what jQuery plugin does)
+				ko.utils.domNodeDisposal.addDisposeCallback(element, function (test) {
+					var editor = editors[options.id];
+
+					if (editor)
+					{
+						editor.destroy();
+						delete editors[options.id];
+					}
+				});
+			}
 		},
 		update: function (element, valueAccessor, allBindingsAccessor, context)
 		{
 			var options = valueAccessor();
 	        $(element).html(ko.utils.unwrapObservable(options.value));
+
 
 	        var config = {};
 	        if (!element.populated && ko.utils.unwrapObservable(options.value).length > 0) {
@@ -553,16 +618,45 @@
 	            if (ck.length < 1) {
 	                ck = $("<div></div>").attr('id','ck-'+ko.utils.unwrapObservable(options).id);
 	                $(element).after(ck);
+	                ck.siblings('[id^=cke_editor]').hide();
 	            }
-	            var editor = CKEDITOR.appendTo( ck[0], config, ko.utils.unwrapObservable(options.value));
+	            
 	            $(element).hide();
+	            
+	            var editor = CKEDITOR.appendTo( ck[0], config, ko.utils.unwrapObservable(options.value));
 	            editor.on('change', function (o) {
 	                $(element).html(o.editor.getData());
 	                valueAccessor().value(o.editor.getData());
 	            });
 	            editor.on('loaded', function() {
+	            	activeEditor = this;
 	                window.admin.resizePage();
+
+	                if(reset == true){
+	                	reset = false;
+	                	activeEditor.destroy();
+
+	                	var ck = $('#ck-'+ko.utils.unwrapObservable(options).id);
+			            if (ck.length >= 1) {
+			                ck.html("");
+			                ck.siblings('[id^=cke_editor]').hide();
+			            }
+
+			            var editor = CKEDITOR.appendTo( ck[0], config, ko.utils.unwrapObservable(options.value));
+			            $(element).hide();
+			            editor.on('change', function (o) {
+			                $(element).html(o.editor.getData());
+			                valueAccessor().value(o.editor.getData());
+			            });
+			            editor.on('loaded', function() {
+			                window.admin.resizePage();
+			            });
+			        }
 	            });
+	        }
+
+	        if(ko.utils.unwrapObservable(options.value) == ""){
+	        	reset = true;
 	        }
 		}
 	};
