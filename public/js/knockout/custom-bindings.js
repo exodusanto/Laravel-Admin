@@ -572,12 +572,12 @@
 				{
 					setTimeout(function()
 					{
-						window.admin.resizePage();
+						if(window.admin)window.admin.resizePage();
 					}, 50);
 
 					editor.on('resize', function()
 					{
-						window.admin.resizePage();
+						if(window.admin)window.admin.resizePage();
 					});
 				});
 
@@ -612,7 +612,8 @@
 
 
 	        var config = {};
-	        if (!element.populated && ko.utils.unwrapObservable(options.value).length > 0) {
+	        var unwrapLenght = ko.utils.unwrapObservable(options.value) ? ko.utils.unwrapObservable(options.value).length : false;
+	        if (!element.populated && unwrapLenght) {
 	            element.populated = true;
 	            var ck = $('#ck-'+ko.utils.unwrapObservable(options).id);
 	            if (ck.length < 1) {
