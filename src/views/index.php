@@ -38,7 +38,7 @@
 </script>
 
 <style type="text/css">
-
+@media screen and (min-width: 530px){
 	div.item_edit form.edit_form select, div.item_edit form.edit_form input[type=hidden], div.item_edit form.edit_form .select2-container {
 		width: <?php echo $formWidth - 59 ?>px !important;
 	}
@@ -64,6 +64,7 @@
 	div.item_edit form.edit_form > div.image img, div.item_edit form.edit_form > div.image div.image_container {
 		max-width: <?php echo $formWidth - 65 ?>px;
 	}
+}
 
 </style>
 
