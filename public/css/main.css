@@ -905,6 +905,8 @@ a {
   /* IE6-9 */
 
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#818181', endColorstr='#646464', GradientType=0);
+
+  background: #37474F;
 }
 #wrapper header a#menu_button > div {
   height: 35px;
@@ -987,12 +989,13 @@ a {
   background: -ms-linear-gradient(top, #333333 0%, #444444 100%);
   /* IE10+ */
 
-  background: linear-gradient(top, #333333 0%, #444444 100%);
   /* W3C */
 
   /* IE6-9 */
 
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#818181', endColorstr='#646464', GradientType=0);
+  background: #263238;
+  
   min-width: 300px;
   min-height: 100%;
 }
