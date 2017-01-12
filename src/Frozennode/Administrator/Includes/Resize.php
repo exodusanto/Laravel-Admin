@@ -89,7 +89,7 @@ class Resize{
 	/**
 	 * Resizes and/or crops an image
 	 * @param  mixed   $image resource or filepath
-	 * @param  strung  $save_path where to save the resized image
+	 * @param  string  $save_path where to save the resized image
 	 * @param  int (0-100) $quality
 	 * @return bool
 	 */
@@ -101,10 +101,25 @@ class Resize{
 		$this->height = imagesy( $image );
 
 		// Get optimal width and height - based on $option.
-		$option_array = $this->get_dimensions( $this->new_width , $this->new_height , $this->option );
 
-		$optimal_width	= $option_array['optimal_width'];
-		$optimal_height	= $option_array['optimal_height'];
+		if( $this->option == 'test' ){
+			if($this->width < $this->new_width || $this->height < $this->new_height){
+
+				$optimal_width	= $this->width;
+				$optimal_height	= $this->height;
+			}else{
+
+				$option_array = $this->get_dimensions( $this->new_width , $this->new_height , $this->option );
+
+				$optimal_width	= $option_array['optimal_width'];
+				$optimal_height	= $option_array['optimal_height'];
+			}
+		}else{
+			$option_array = $this->get_dimensions( $this->new_width , $this->new_height , $this->option );
+
+			$optimal_width	= $option_array['optimal_width'];
+			$optimal_height	= $option_array['optimal_height'];
+		}
 
 		// Resample - create image canvas of x, y size.
 		$this->image_resized = imagecreatetruecolor( $optimal_width , $optimal_height );
@@ -220,6 +235,11 @@ class Resize{
 				$optimal_height	= $this->get_size_by_fixed_width( $new_width );
 				break;
 			case 'auto':
+				$option_array	= $this->get_size_by_auto( $new_width , $new_height );
+				$optimal_width	= $option_array['optimal_width'];
+				$optimal_height	= $option_array['optimal_height'];
+				break;
+			case 'test':
 				$option_array	= $this->get_size_by_auto( $new_width , $new_height );
 				$optimal_width	= $option_array['optimal_width'];
 				$optimal_height	= $option_array['optimal_height'];
