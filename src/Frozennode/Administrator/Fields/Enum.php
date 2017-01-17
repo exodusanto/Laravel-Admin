@@ -24,6 +24,12 @@ class Enum extends Field {
 		$options = $this->suppliedOptions;
 
 		$dataOptions = $options['options'];
+
+		// Check if function
+		if(is_callable($dataOptions)){
+			$dataOptions = call_user_func($dataOptions);
+		}
+
 		$options['options'] = array();
 
 		//iterate over the options to create the options assoc array
