@@ -11,7 +11,7 @@ class Enum extends Field {
 	 * @var array
 	 */
 	protected $rules = array(
-		'options' => 'required|array|not_empty',
+		'options' => 'required',
 	);
 
 	/**
