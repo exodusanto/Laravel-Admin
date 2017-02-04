@@ -88,7 +88,7 @@ class AdminController extends Controller {
 
 			if ($model->exists)
 			{
-				$model = $config->updateModel($model, $fieldFactory, $actionFactory);
+				$model = $config->updateModel($model, $itemId, $fieldFactory, $actionFactory);
 			}
 
 			$response = $actionPermissions['view'] ? response()->json($model) : response()->json(array(
