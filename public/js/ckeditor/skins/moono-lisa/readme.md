@@ -1,11 +1,19 @@
-"Kama" Skin
-====================
+"Moono-lisa" Skin
+=================
 
-"Kama" is the default skin of CKEditor 3.x.
-It's been ported to CKEditor 4 and fully featured.
+This skin has been made a **default skin** starting from CKEditor 4.6.0 and is maintained by the core developers.
 
 For more information about skins, please check the [CKEditor Skin SDK](http://docs.cksource.com/CKEditor_4.x/Skin_SDK)
 documentation.
+
+Features
+-------------------
+"Moono-lisa" is a monochromatic skin, which offers a modern, flat and minimalistic look which blends very well in modern design.
+It comes with the following features:
+
+- Chameleon feature with brightness.
+- High-contrast compatibility.
+- Graphics source provided in SVG.
 
 Directory Structure
 -------------------
@@ -27,14 +35,12 @@ it's not loaded until the first menu open up,
 
 Other parts:
 - **skin.js**: the only JavaScript part of the skin that registers the skin, its browser specific files and its icons and defines the Chameleon feature,
-- **icons/**: contains all skin defined icons,
-- **images/**: contains a fill general used images.
+- **images/**: contains a fill general used images,
+- **dev/**: contains SVG and PNG source of the skin icons.
 
 License
 -------
 
-Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
 
-Licensed under the terms of any of the following licenses at your choice: [GPL](http://www.gnu.org/licenses/gpl.html), [LGPL](http://www.gnu.org/licenses/lgpl.html) and [MPL](http://www.mozilla.org/MPL/MPL-1.1.html).
-
-See LICENSE.md for more information.
+For licensing, see LICENSE.md or [http://ckeditor.com/license](http://ckeditor.com/license)

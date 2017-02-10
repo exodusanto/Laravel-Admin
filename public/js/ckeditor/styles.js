@@ -57,6 +57,12 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ name: 'Superscript',		element: 'sup' },
 	*/
 
+	{ name: 'Title Font',			element: 'span', attributes: {'class': 'title-font'}},
+	{ name: 'Bigger Size',			element: 'span', attributes: {'class': 'fsize-bigger'}},
+	{ name: 'Big Size',			element: 'span', attributes: {'class': 'fsize-big'}},
+	{ name: 'Medium Size',			element: 'span', attributes: {'class': 'fsize-medium'}},
+	{ name: 'Medium-Small Size',	element: 'span', attributes: {'class': 'fsize-medium-s'}},
+	{ name: 'Small Size',			element: 'span', attributes: {'class': 'fsize-small'}},
 	{ name: 'Marker',			element: 'span', attributes: { 'class': 'marker' } },
 
 	{ name: 'Big',				element: 'big' },
