@@ -18,6 +18,12 @@ Legacy Version
 
 ## Composer
 
+To install Administrator as a Composer package to be used with Laravel 5.4, simply run:
+
+```sh
+composer require "exodusanto/administrator: 5.4"
+```
+
 To install Administrator as a Composer package to be used with Laravel 5, simply run:
 
 ```sh
