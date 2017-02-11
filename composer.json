@@ -1,6 +1,6 @@
 {
 	"name": "frozennode/administrator",
-	"description": "A database interface package for Laravel",
+	"description": "A database interface package for Laravel (Legacy)",
 	"homepage": "http://administrator.frozennode.com",
 	"keywords": ["administrator", "admin", "database", "laravel-administrator", "laravel", "cms"],
 	"license": "MIT",
@@ -8,14 +8,18 @@
 		{
 			"name": "Jan Hartigan",
 			"email": "jan@frozennode.com"
+		},
+		{
+			"name": "Antonio Dal Sie",
+			"email": "info@antoniodalsie.com"
 		}
 	],
 	"support": {
-		"issues": "https://github.com/FrozenNode/Laravel-Administrator/issues"
+		"issues": "https://github.com/exodusanto/Laravel-Admin/issues"
 	},
 	"require": {
-		"php": ">=5.4.0",
-		"laravel/framework": "5.*",
+		"php": ">=5.6.0",
+		"laravel/framework": "5.4.*",
 		"ckeditor/ckeditor": "4.*"
 	},
 	"require-dev": {
