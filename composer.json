@@ -1,6 +1,6 @@
 {
-	"name": "frozennode/administrator",
-	"description": "A database interface package for Laravel (Legacy)",
+	"name": "exodusanto/administrator",
+	"description": "A database interface package for Laravel (Legacy of Frozennode Laravel-Administrator)",
 	"homepage": "http://administrator.frozennode.com",
 	"keywords": ["administrator", "admin", "database", "laravel-administrator", "laravel", "cms"],
 	"license": "MIT",
