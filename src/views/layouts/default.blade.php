@@ -4,6 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 	<title>{{ is_callable(config('administrator.title')) ? call_user_func(config('administrator.title')) : config('administrator.title') }}</title>
+	
+	@if(!!config('administrator.favicon'))
+		<link rel='icon' type='image/png' href="{{ asset(is_callable(config('administrator.favicon')) ? call_user_func(config('administrator.favicon')) : config('administrator.favicon')) }}">
+	@endif
 
 	@foreach ($css as $url)
 		<link href="{{$url}}" media="all" type="text/css" rel="stylesheet">
