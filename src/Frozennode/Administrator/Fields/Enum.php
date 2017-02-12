@@ -11,7 +11,7 @@ class Enum extends Field {
 	 * @var array
 	 */
 	protected $rules = array(
-		'options' => 'required|array|not_empty',
+		'options' => 'required',
 	);
 
 	/**
@@ -24,6 +24,12 @@ class Enum extends Field {
 		$options = $this->suppliedOptions;
 
 		$dataOptions = $options['options'];
+
+		// Check if function
+		if(is_callable($dataOptions)){
+			$dataOptions = call_user_func($dataOptions);
+		}
+
 		$options['options'] = array();
 
 		//iterate over the options to create the options assoc array

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>{{ config('administrator.title') }}</title>
+	<title>{{ is_callable(config('administrator.title')) ? call_user_func(config('administrator.title')) : config('administrator.title') }}</title>
 
 	@foreach ($css as $url)
 		<link href="{{$url}}" media="all" type="text/css" rel="stylesheet">

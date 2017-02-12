@@ -71,7 +71,7 @@ class Factory {
 	 */
 	protected $rules = array(
 		'uri' => 'required|string',
-		'title' => 'required|string',
+		'title' => 'required',
 		'domain' => 'string',
 		'middleware' => 'array',
 		'model_config_path' => 'required|string|directory',
