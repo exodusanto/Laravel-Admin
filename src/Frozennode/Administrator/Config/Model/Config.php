@@ -269,10 +269,10 @@ class Config extends ConfigBase implements ConfigInterface {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Model
 	 */
-	public function updateModel($model, FieldFactory $fieldFactory, ActionFactory $actionFactory)
+	public function updateModel($model, $id, FieldFactory $fieldFactory, ActionFactory $actionFactory)
 	{
 		//set the data model to the active model
-		$this->setDataModel($model->find($model->getKey()));
+		$this->setDataModel($model->find($id));
 
 		//include the item link if one was supplied
 		if ($link = $this->getModelLink())
@@ -286,7 +286,6 @@ class Config extends ConfigBase implements ConfigInterface {
 		//set up the new actions data
 		$model->setAttribute('administrator_actions', $actionFactory->getActionsOptions(true));
 		$model->setAttribute('administrator_action_permissions', $actionFactory->getActionPermissions(true));
-
 		return $model;
 	}
 

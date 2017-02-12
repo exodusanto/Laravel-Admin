@@ -26,9 +26,16 @@ return array(
 	/**
 	 * Page title
 	 *
-	 * @type string
+	 * @type closure|string
 	 */
 	'title' => 'Admin',
+
+	/**
+	 * Page favicon (only png)
+	 *
+	 * @type closure|string
+	 */
+	'favicon' => '',
 
 	/**
 	 * The path to your model config directory

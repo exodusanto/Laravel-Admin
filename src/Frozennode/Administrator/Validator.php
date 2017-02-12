@@ -1,6 +1,8 @@
 <?php
 namespace Frozennode\Administrator;
 
+use Illuminate\Support\Str;
+
 class Validator extends \Illuminate\Validation\Validator {
 
 	protected $overrideCustomMessages = array(
@@ -56,6 +58,25 @@ class Validator extends \Illuminate\Validation\Validator {
 		$this->setRules($rules);
 		$this->setCustomMessages($this->overrideCustomMessages);
 	}
+
+	protected function explodeRules(array $rules)
+    {
+        foreach ($rules as $key => $rule) {
+            if (Str::contains($key, '*')) {
+                $this->each($key, [$rule]);
+                unset($rules[$key]);
+            } else {
+                if (is_string($rule)) {
+                    $rules[$key] = explode('|', $rule);
+                } elseif (is_object($rule)) {
+                    $rules[$key] = [$rule];
+                } else {
+                    $rules[$key] = $rule;
+                }
+            }
+        }
+        return $rules;
+    }
 
 	/**
 	 * Sets the rules
