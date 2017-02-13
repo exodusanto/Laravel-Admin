@@ -269,10 +269,14 @@ class Config extends ConfigBase implements ConfigInterface {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Model
 	 */
-	public function updateModel($model, $id, FieldFactory $fieldFactory, ActionFactory $actionFactory)
+	public function updateModel($model, FieldFactory $fieldFactory, ActionFactory $actionFactory, $id = null)
 	{
 		//set the data model to the active model
-		$this->setDataModel($model->find($id));
+		if($id != null){
+			$this->setDataModel($model->find($id));
+		}else{
+			$this->setDataModel($model->find($model->getKey()));
+		}
 
 		//include the item link if one was supplied
 		if ($link = $this->getModelLink())
