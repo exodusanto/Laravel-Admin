@@ -85,11 +85,23 @@ This is the additional middlewares that you wish to run on administrator route.
 	/**
 	 * Page title
 	 *
-	 * @type string
+	 * @type string or Closure
 	 */
 	'title' => 'Admin',
 
 This is the title of the administrative interface displayed to the user at the top left of the page.
+
+<a name="favicon"></a>
+### Favicon (PNG)
+
+	/**
+	 * Page favicon (only png)
+	 *
+	 * @type string or Closure
+	 */
+	'favicon' => 'favicon.png',
+
+This is the favicon of the administrative pages.
 
 <a name="model-config-path"></a>
 ### Model Config Path

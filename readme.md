@@ -21,7 +21,7 @@ Legacy Version
 To install Administrator as a Composer package to be used with Laravel 5.4, simply run:
 
 ```sh
-composer require "exodusanto/administrator: 5.4"
+composer require "exodusanto/administrator: 5.4.*"
 ```
 
 To install Administrator as a Composer package to be used with Laravel 5, simply run:
@@ -34,7 +34,7 @@ Once it's installed, you can register the service provider in `config/app.php` i
 
 ```php
 'providers' => [
-	'Frozennode\Administrator\AdministratorServiceProvider',
+    'Frozennode\Administrator\AdministratorServiceProvider',
 ]
 ```
 
@@ -58,8 +58,8 @@ Since Administrator has switched over to Composer, you can no longer use `php ar
 
 ```php
 'administrator' => array(
-	'handles' => 'admin', //this determines what URI this bundle will use
-	'auto' => true,
+    'handles' => 'admin', //this determines what URI this bundle will use
+    'auto' => true,
 ),
 ```
 
@@ -74,6 +74,18 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 
 ## Recent Changelog
+
+### 5.4.0
+- Added: New layout
+- Added: Laravel 5.4 compatibility
+- Added: Title config String or Closure
+- Added: Favicon (png only) config String or Closure
+- Added: ENUM config Array or Closure
+- Added: New ckeditor layout
+- Added: Images config:
+    - **Test** resize: prevent stretch of image
+    - **Incremental** naming: name*_n* if already exist
+- Bugfix: wysiwyg loading on settings
 
 ### 5.0.11
 - Bugfix: Had to make the middleware additon backwards compatable
