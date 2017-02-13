@@ -12,7 +12,7 @@ Legacy Version
 - **Website:** [http://antoniodalsie.com](http://antoniodalsie.com/)
 - **Version:** 5.4
 
-[![Build Status](https://travis-ci.org/FrozenNode/Laravel-Administrator.png?branch=master)](https://travis-ci.org/FrozenNode/Laravel-Administrator)
+[![Build Status](https://travis-ci.org/exodusanto/Laravel-Admin.svg?branch=master)](https://travis-ci.org/exodusanto/Laravel-Admin)
 
 <img src="https://raw.github.com/FrozenNode/Laravel-Administrator/master/examples/images/overview.jpg" />
 
