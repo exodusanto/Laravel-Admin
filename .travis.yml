@@ -9,6 +9,8 @@ branches:
   except:
     - 3.3.2
     - v5
+    - laravel-fix
+    - laravel-fix-54
 
 before_script:
   - curl -s http://getcomposer.org/installer | php
