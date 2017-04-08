@@ -55,7 +55,7 @@ class Boolean extends Field {
 		$this->userOptions['value'] = $this->validator->arrayGet($filter, 'value', '');
 
 		//if it isn't null, we have to check the 'true'/'false' string
-		if ($this->userOptions['value'] !== '')
+		if (!is_null($this->userOptions['value']))
 		{
 			$this->userOptions['value'] = $this->userOptions['value'] === 'false' || !$this->userOptions['value'] ? 0 : 1;
 		}
@@ -72,7 +72,7 @@ class Boolean extends Field {
 	public function filterQuery(QueryBuilder &$query, &$selects = null)
 	{
 		//if the field isn't empty
-		if ($this->getOption('value') !== '')
+		if (!is_null($this->getOption('value')))
 		{
 			$query->where($this->config->getDataModel()->getTable().'.'.$this->getOption('field_name'), '=', $this->getOption('value'));
 		}
