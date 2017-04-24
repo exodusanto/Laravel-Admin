@@ -55,6 +55,16 @@ class Multup {
 	private $random_cb;
 
 	/*
+	*	Prefix name
+	*/
+	private $prefix = "";
+
+	/*
+	*	Suffix name
+	*/
+	private $suffix = "";
+
+	/*
 	* Sizing information for thumbs to create
 	* array ( width, height, crop_type, path_to_save, quality)
 	*/
@@ -76,12 +86,14 @@ class Multup {
 	 * Instantiates the Multup
 	 * @param mixed $file The file array provided by Laravel's Input::file('field_name') or a path to a file
 	 */
-	public function __construct($input, $rules, $path, $random)
+	public function __construct($input, $rules, $path, $random, $prefix, $suffix)
 	{
 		$this->input  = $input;
 		$this->rules  = $rules;
 		$this->path = $path;
 		$this->random = $random;
+		$this->prefix = $prefix;
+		$this->suffix = $suffix;
 	}
 
 	/**
@@ -93,9 +105,9 @@ class Multup {
 	 * @param  bool $random Whether or not to randomize the filename, the filename will be set to a 32 character string if true
 	 * @return Multup
 	 */
-	public static function open($input, $rules, $path, $random = true)
+	public static function open($input, $rules, $path, $random = true, $prefix = "", $suffix = "")
 	{
-		return new Multup( $input, $rules, $path, $random );
+		return new Multup( $input, $rules, $path, $random, $prefix, $suffix );
 	}
 
 	/*
@@ -205,6 +217,9 @@ class Multup {
 			} else {
 				$filename = $original_name;
 			}
+
+			if($this->prefix !== "") $filename = $prefix.$filename;
+			if($this->suffix !== "") $filename = $filename.;
 
 			/* upload the file */
 			$save = $this->image[$this->input]->move($this->path, $filename);
