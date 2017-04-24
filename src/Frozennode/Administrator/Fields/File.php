@@ -16,6 +16,8 @@ class File extends Field {
 		'mimes' => false,
 		'size_limit' => 2,
 		'display_raw_value' => false,
+		'name_prefix' => '',
+		'name_suffix' => ''
 	);
 
 	/**
@@ -28,6 +30,8 @@ class File extends Field {
 		'naming' => 'in:keep,random,incremental',
 		'length' => 'integer|min:0',
 		'mimes' => 'string',
+		'name_prefix' => 'string',
+		'name_suffix' => 'string'
 	);
 
 	/**
@@ -56,7 +60,7 @@ class File extends Field {
 
 		//use the multup library to perform the upload
 		$result = Multup::open('file', 'max:' . $this->getOption('size_limit') * 1000 . $mimes, $this->getOption('location'),
-									$this->getOption('naming'))
+									$this->getOption('naming'), $this->getOption('name_prefix'), $this->getOption('name_suffix'))
 			->set_length($this->getOption('length'))
 			->upload();
 

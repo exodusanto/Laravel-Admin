@@ -218,8 +218,8 @@ class Multup {
 				$filename = $original_name;
 			}
 
-			if($this->prefix !== "") $filename = $prefix.$filename;
-			if($this->suffix !== "") $filename = $filename.;
+			if($this->prefix !== "") $filename = $this->prefix.$filename;
+			if($this->suffix !== "") $filename = $filename.$this->suffix;
 
 			/* upload the file */
 			$save = $this->image[$this->input]->move($this->path, $filename);
