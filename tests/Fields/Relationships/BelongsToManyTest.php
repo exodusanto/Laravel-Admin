@@ -74,7 +74,7 @@ class BelongsToManyTest extends \PHPUnit_Framework_TestCase {
 	public function testBuild()
 	{
 		$relatedModel = m::mock(array('getKeyName' => 'id', 'getTable' => 'other_table'));
-		$relationship = m::mock(array('getRelated' => $relatedModel, 'getForeignKey' => 'some_id', 'getOtherKey' => 'some_other_id',
+		$relationship = m::mock(array('getRelated' => $relatedModel, 'getQualifiedForeignKeyName' => 'some_id', 'getQualifiedRelatedKeyName' => 'some_other_id',
 										'getTable' => 'table'));
 		$model = m::mock(array('field' => $relationship, 'getTable' => 'table'));
 		$this->config->shouldReceive('getDataModel')->twice()->andReturn($model);

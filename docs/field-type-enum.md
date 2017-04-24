@@ -13,7 +13,7 @@ The `enum` field type should be any text-like type or an ENUM in your database. 
 	'season' => array(
 		'type' => 'enum',
 		'title' => 'Season',
-		'options' => array('Winter', 'Spring', 'Summer', 'Fall'), //must be an array
+		'options' => array('Winter', 'Spring', 'Summer', 'Fall'),
 	),
 	//alternate method:
 	'season' => array(
@@ -25,6 +25,22 @@ The `enum` field type should be any text-like type or an ENUM in your database. 
 			'Summer' => 'Hot, Hot Summer!',
 			'Fall'
 		),
+	),
+
+	//alternate method with Closure:
+	'season' => array(
+		'type' => 'enum',
+		'title' => 'Season',
+		'options' => function(){
+			$options = array(
+				'Winter' => 'Cold, Cold Winter!',
+				'Spring',
+				'Summer' => 'Hot, Hot Summer!',
+				'Fall'
+			);
+
+			return $options;
+		},
 	),
 
 In the edit form, an admin user will be presented with a select box showing the choices.

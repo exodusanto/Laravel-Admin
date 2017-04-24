@@ -29,6 +29,7 @@ Below is a list of all the available options:
 - [Domain](#domain)
 - [Middleware](#middleware)
 - [Title](#title)
+- [Favicon (PNG)](#favicon)
 - [Model Config Path](#model-config-path)
 - [Settings Config Path](#settings-config-path)
 - [Menu](#menu)
@@ -85,11 +86,23 @@ This is the additional middlewares that you wish to run on administrator route.
 	/**
 	 * Page title
 	 *
-	 * @type string
+	 * @type string or Closure
 	 */
 	'title' => 'Admin',
 
 This is the title of the administrative interface displayed to the user at the top left of the page.
+
+<a name="favicon"></a>
+### Favicon (PNG)
+
+	/**
+	 * Page favicon (only png)
+	 *
+	 * @type string or Closure
+	 */
+	'favicon' => 'favicon.png',
+
+This is the favicon of the administrative pages.
 
 <a name="model-config-path"></a>
 ### Model Config Path
@@ -99,7 +112,7 @@ This is the title of the administrative interface displayed to the user at the t
 	 *
 	 * @type string
 	 */
-	'model_config_path' => app('path') . '/config/administrator',
+	'model_config_path' => config_path('administrator'),
 
 This is the directory location of your application's model config files. It's recommended to use a subdirectory of your application config called `administrator`, but you can put it anywhere you like.
 
@@ -111,7 +124,7 @@ This is the directory location of your application's model config files. It's re
 	 *
 	 * @type string
 	 */
-	'settings_config_path' => app('path') . '/config/administrator/settings',
+	'settings_config_path' => config_path('administrator/settings'),
 
 This is the directory location of your application's settings config files. If you want to create settings pages for your admins, you'll store each settings config file in the path above. As with the `model_config_path`, it's up to you how to organize this. The recommended approach is above, but you may just find a more sensible way to organize your config directories.
 

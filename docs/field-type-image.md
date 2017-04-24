@@ -28,7 +28,7 @@ In the edit form, an admin user will be presented with an image uploader. For th
 
 The required `location` option lets you define where the original image should be stored.
 
-The optional `naming` option lets you define whether to `keep` the file's name or to make the file name `random`. By default this is set to `random` in order to avoid naming collisions, but setting this to `keep` lets you keep your image's file names.
+The optional `naming` option lets you define whether to `keep` the file's name, to make the file name `random` or to `increment` if the file with that name already exist. By default this is set to `random` in order to avoid naming collisions, but setting this to `keep` lets you keep your image's file names.
 
 The optional `length` option lets you define size of file name in case `random` is supplied as `naming` option method.
 
@@ -36,4 +36,4 @@ The optional `size_limit` option lets you set an integer size limit counted in m
 
 The optional `display_raw_value` option lets you put the raw value of the saved image source string into the image input. This is useful if you're using accessors, mutators, and [`setter fields`](/docs/fields#setter-option) to skip storing the image on your local server and instead upload it to a remote public image server.
 
-The optional `sizes` option lets you define as many resizes as you want. The format for these is: `array([width], [height], [method], [save path], [quality])`. The different methods are `exact`, `portrait`, `landscape`, `fit`, `auto`, and `crop`.
+The optional `sizes` option lets you define as many resizes as you want. The format for these is: `array([width], [height], [method], [save path], [quality])`. The different methods are `exact`, `portrait`, `landscape`, `fit`, `auto`, `test` (like `auto` but if image is smaller use `exact`), and `crop`.
