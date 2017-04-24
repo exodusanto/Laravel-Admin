@@ -361,6 +361,7 @@
 .editForm > div.image div.upload_container div.plupload,
 .editForm > div.file div.upload_container div.plupload {
   width: 100% !important;
+  overflow: visible !important;
 }
 .editForm > div.image div.image_container,
 .editForm > div.file div.image_container {
@@ -1650,6 +1651,7 @@ a {
 #admin_page #content div.item_edit_container div.item_edit form.edit_form > div.image div.upload_container div.plupload,
 #admin_page #content div.item_edit_container div.item_edit form.edit_form > div.file div.upload_container div.plupload {
   width: 100% !important;
+  overflow: visible !important;
 }
 #admin_page #content div.item_edit_container div.item_edit form.edit_form > div.image div.image_container,
 #admin_page #content div.item_edit_container div.item_edit form.edit_form > div.file div.image_container {
