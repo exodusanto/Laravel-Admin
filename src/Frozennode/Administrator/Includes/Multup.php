@@ -218,8 +218,10 @@ class Multup {
 				$filename = $original_name;
 			}
 
-			if($this->prefix !== "") $filename = $this->prefix.$filename;
-			if($this->suffix !== "") $filename = $filename.$this->suffix;
+			if($this->random !== "incremental"){
+				if($this->prefix !== "") $filename = $this->prefix.$filename;
+				if($this->suffix !== "") $filename = $filename.$this->suffix;
+			}
 
 			/* upload the file */
 			$save = $this->image[$this->input]->move($this->path, $filename);
@@ -247,6 +249,8 @@ class Multup {
 	private function generate_incremental_filename($original_name,$count = "")
 	{
 		$name = pathinfo($original_name, PATHINFO_FILENAME); 
+		// add prefix and suffix
+		$name = $this->prefix.$name.$this->suffix;
 		$ext = File::extension($original_name);
 		$counter = $count != "" ? '_'.($count-1) : "";
 
