@@ -1,4 +1,4 @@
-# Laravel Administrator (Legacy Version)
+# Laravel Administrator (New Version)
 
 Administrator is an administrative interface builder for [Laravel](http://laravel.com). With Administrator you can visually manage your Eloquent models and their relations, and also create stand-alone settings pages for storing site data and performing site tasks.
 
@@ -6,7 +6,7 @@ Administrator is an administrative interface builder for [Laravel](http://larave
 - **Website:** [http://frozennode.com](http://administrator.frozennode.com/)
 - **Version:** 5.0.11
 
-Legacy Version
+New Version
 
 - **Author:** Antonio Dal Sie
 - **Website:** [http://antoniodalsie.com](http://antoniodalsie.com/)
@@ -27,7 +27,7 @@ composer require "exodusanto/administrator: 5.4.*"
 To install Administrator as a Composer package to be used with Laravel 5, simply run:
 
 ```sh
-composer require "frozennode/administrator: 5.*"
+composer require "exodusanto/administrator: 5.*"
 ```
 
 Once it's installed, you can register the service provider in `config/app.php` in the `providers` array:
@@ -45,7 +45,7 @@ Then publish Administrator's assets with `php artisan vendor:publish`. This will
 If you want to use Administrator with Laravel 4, you need to resolve to Administrator 4:
 
 ```json
-"frozennode/administrator": "4.*"
+"exodusanto/administrator": "4.*"
 ```
 
 Then publish the config file with `php artisan config:publish frozennode/administrator`. This will add the file `app/config/packages/frozennode/administrator/administrator.php`.
