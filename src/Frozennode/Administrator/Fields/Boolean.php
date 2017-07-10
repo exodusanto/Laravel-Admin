@@ -55,9 +55,8 @@ class Boolean extends Field {
 		$this->userOptions['value'] = $this->validator->arrayGet($filter, 'value', '');
 
 		//if it isn't null, we have to check the 'true'/'false' string
-		$value = $this->userOptions['value'];
-		if (!is_null($value) && $value !== "")
-		{
+		if (gettype($this->userOptions['value']) != 'NULL' && $this->userOptions['value'] !== '')
+		{			
 			$this->userOptions['value'] = $this->userOptions['value'] === 'false' || !$this->userOptions['value'] ? 0 : 1;
 		}
 	}
