@@ -74,7 +74,7 @@ class Boolean extends Field {
 	{
 		//if the field isn't empty
 		$value = $this->getOption('value');
-		if (!is_null($value) && $value !== "")
+		if (gettype($this->userOptions['value']) != 'NULL' && $value !== "")
 		{
 			$query->where($this->config->getDataModel()->getTable().'.'.$this->getOption('field_name'), '=', $this->getOption('value'));
 		}
