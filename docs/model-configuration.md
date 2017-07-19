@@ -106,7 +106,7 @@ This must be the fully-qualified class name of your Eloquent model. In this case
 
 These are the columns that will be displayed in your result set. As you can see above, you can customize this fairly extensively by modifying the output, performing custom SQL selects, or by pulling in relational information for this field based on its Eloquent relationships.
 
-> For a detailed description of all the column options, see the **[column docs](/docs/columns)**
+> For a detailed description of all the column options, see the **[column docs](/docs/columns.md)**
 
 <a name="edit-fields"></a>
 ### Edit Fields *(required)*
@@ -142,7 +142,7 @@ The `edit_fields` array lets you define the editable fields for a model. There a
 
 <img src="https://raw.github.com/FrozenNode/Laravel-Administrator/master/examples/images/edit-form.png" />
 
-> For a detailed description of all the edit field types and options, see the **[field docs](/docs/fields)**
+> For a detailed description of all the edit field types and options, see the **[field docs](/docs/fields.md)**
 
 <a name="filters"></a>
 ### Filters
@@ -165,7 +165,7 @@ The `edit_fields` array lets you define the editable fields for a model. There a
 
 The `filters` array lets you define filters for a model. These work just like the `edit_field` items, except there are fewer filterable field types. For example, you can have an `image` field type in the `edit_fields` array, but you can't provide a `'type' => 'image'` in the `filters` array. You can, however, filter by an image's name by setting the field as a `text` field type.
 
-> For a detailed description of all the filter types and options, see the **[filters docs](/docs/fields#filters)**
+> For a detailed description of all the filter types and options, see the **[filters docs](/docs/fields.md#filters)**
 
 <a name="query-filter"></a>
 ## Query Filter
@@ -260,7 +260,7 @@ You can define custom actions for your model if you want to provide the administ
 
 When the user clicks on either button, the `action` property above is called and passed the relevant Eloquent model.
 
-> For a detailed description of custom actions, see the **[actions docs](/docs/actions)**
+> For a detailed description of custom actions, see the **[actions docs](/docs/actions.md)**
 
 <a name="global-custom-actions"></a>
 ### Global Custom Actions
@@ -293,7 +293,7 @@ When the user clicks on either button, the `action` property above is called and
 
 Global custom actions are buttons that can be pressed at any time on a model's page. In most ways, this works just like regular custom actions. However, instead of the model being passed into the `action` callback function, the query builder is passed in with all the filters already applied (except for the limit/offset).
 
-> For a detailed description of custom actions, see the **[actions docs](/docs/actions)**
+> For a detailed description of custom actions, see the **[actions docs](/docs/actions.md)**
 
 <a name="form-request-option"></a>
 ### Form Request Option
@@ -323,7 +323,7 @@ The `form request` option lets you define a custom [form request](http://laravel
 
 The validation rules for your models can be set using the `rules` option. Administrator uses [Laravel's validation](http://laravel.com/docs/validation) to validate your models. If the form is invalid, it will notify the admin user without saving the form.
 
-> For a detailed description of validation, see the **[validation docs](/docs/validation)**
+> For a detailed description of validation, see the **[validation docs](/docs/validation.md)**
 
 <a name="validation-messages"></a>
 ### Validation Messages
