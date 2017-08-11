@@ -311,23 +311,25 @@ class Factory {
 	 *
 	 * @return mixed
 	 */
-	public function fetchConfigFile($name)
-	{
-		$name = str_replace($this->getPrefix(), '', $name);
-		$path = $this->getPath() . $name . '.php';
+    public function fetchConfigFile($name)
+    {
+        $name = str_replace($this->getPrefix(), '', $name);
+        $path = $this->getPath() . $name . '.php';
+        if (is_file($path)) {
+            return $this->requireConfigFile($path, $name);
+        } else if (strpos($name, '.') !== false) {
+            $path = $this->getPath() . str_replace('.', DIRECTORY_SEPARATOR, $name) . '.php';
+            if (is_file($path)) {
+                return $this->requireConfigFile($path, $name);
+            }
+        }
+        return false;
+    }
 
-		//check that this is a legitimate file
-		if (is_file($path))
-		{
-			//set the options var
-			$options = require $path;
-
-			//add the name in
-			$options['name'] = $name;
-
-			return $options;
-		}
-
-		return false;
-	}
+    protected function requireConfigFile($path, $name)
+    {
+        $options = require $path;
+        $options['name'] = $name;
+        return $options;
+    }
 }
