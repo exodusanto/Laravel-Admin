@@ -18,8 +18,8 @@
 		"issues": "https://github.com/exodusanto/Laravel-Admin/issues"
 	},
 	"require": {
-		"php": ">=5.6.0",
-		"laravel/framework": "5.4.*",
+		"php": ">=7.0.0",
+		"laravel/framework": "5.5.*",
 		"ckeditor/ckeditor": "4.*"
 	},
 	"require-dev": {
