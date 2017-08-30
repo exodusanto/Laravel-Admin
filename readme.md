@@ -18,6 +18,12 @@ New Version
 
 ## Composer
 
+To install Administrator as a Composer package to be used with Laravel 5.5, simply run:
+
+```sh
+composer require "exodusanto/administrator: 5.5.*"
+```
+
 To install Administrator as a Composer package to be used with Laravel 5.4, simply run:
 
 ```sh
@@ -75,6 +81,10 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ## Recent Changelog
 
+### 5.5.0
+- Added: L5.5 support
+- Added: Laravel Package Auto-Discovery
+
 ### 5.4.0
 - Added: New layout
 - Added: Laravel 5.4 compatibility
@@ -121,19 +131,3 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 - Bugfix: Fixed improper handling of filter value 0 for Enum/Text field
 - Docfix: Simplified the composer command in the install docs to match the packagist.org instuctions
 - Docfix: Changed the type definition for global_rows_per_page to int instead of Null|nt since Null causes divide by 0 error
-
-### 5.0.4
-- Testfix: fixing tests and js for gulp
-
-### 5.0.3
-- Cherry Picking v4.16.7
-
-### 5.0.2
-- Cherry Picking v4.16.6
-
-### 5.0.1
-- Bugfix: Fixing csrf token mismatches for some requests
-
-### 5.0.0
-- Upgraded to Laravel 5
-- New translations (az)

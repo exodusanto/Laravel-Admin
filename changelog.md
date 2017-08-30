@@ -1,5 +1,20 @@
 ## Changelog
 
+### 5.5.0
+- Added: L5.5 support
+- Added: Laravel Package Auto-Discovery
+
+### 5.4.0
+- Added: New layout
+- Added: Laravel 5.4 compatibility
+- Added: Title config String or Closure
+- Added: Favicon (png only) config String or Closure
+- Added: ENUM config Array or Closure
+- Added: New ckeditor layout
+- Added: Images config:
+    - **Test** resize: prevent stretch of image
+    - **Incremental** naming: name*_n* if already exist
+- Bugfix: wysiwyg loading on settings
 ### 5.0.11
 - Bugfix: Had to make the middleware additon backwards compatable
 - Docs: Added doc updates
