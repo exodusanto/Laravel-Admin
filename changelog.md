@@ -1,5 +1,8 @@
 ## Changelog
 
+### 5.5.1
+- Bugfix: Fix relation BelongsToMany methods 
+
 ### 5.5.0
 - Added: L5.5 support
 - Added: Laravel Package Auto-Discovery
