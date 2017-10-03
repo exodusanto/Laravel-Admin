@@ -472,6 +472,7 @@
 #settings_page form.settings_form > div input {
   margin-bottom: 0;
   vertical-align: top;
+  font-size: 11px !important;
 }
 #settings_page form.settings_form > div textarea {
   width: 98%;
