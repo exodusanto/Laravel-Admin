@@ -472,7 +472,6 @@
 #settings_page form.settings_form > div input {
   margin-bottom: 0;
   vertical-align: top;
-  font-size: 11px !important;
 }
 #settings_page form.settings_form > div textarea {
   width: 98%;
@@ -1883,6 +1882,11 @@ input[type="button"]:disabled,input[type="submit"]:disabled{
   -webkit-box-shadow: 0 0 4px rgba(0,0,0,0);
   -moz-box-shadow: 0 0 4px rgba(0,0,0,0);
   box-shadow: 0 0 4px rgba(0,0,0,0);
+}
+
+#settings_page form.settings_form > div input,
+#admin_page #content div.item_edit_container div.item_edit form.edit_form > div input{
+  font-size: 11px !important;
 }
 
 /* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
