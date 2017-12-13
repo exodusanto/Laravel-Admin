@@ -1,5 +1,8 @@
 ## Changelog
 
+### 5.5.3
+- Added: Image field upload to Storage (ex. S3)
+
 ### 5.5.1
 - Bugfix: Fix relation BelongsToMany methods 
 

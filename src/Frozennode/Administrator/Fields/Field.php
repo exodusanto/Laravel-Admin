@@ -258,12 +258,13 @@ abstract class Field {
 	 *
 	 * @return mixed
 	 */
-	public function getOption($key)
+	public function getOption($key, $default = null)
 	{
 		$options = $this->getOptions();
 
 		if (!array_key_exists($key, $options))
 		{
+			if($default !== null) return $default;
 			throw new \InvalidArgumentException("An invalid option '$key' was searched for in the '" . $this->userOptions['field_name'] . "' field");
 		}
 

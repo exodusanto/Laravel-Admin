@@ -31,10 +31,17 @@ class Image extends File {
 	public function doUpload()
 	{
 		//use the multup library to perform the upload
-		$result = Multup::open('file', 'image|max:' . $this->getOption('size_limit') * 1000, $this->getOption('location'),
-									$this->getOption('naming'), $this->getOption('name_prefix'), $this->getOption('name_suffix'))
+		$result = Multup::open(
+			'file',
+			'image|max:' . $this->getOption('size_limit') * 1000,
+			$this->getOption('location'),
+			$this->getOption('naming'),
+			$this->getOption('name_prefix'),
+			$this->getOption('name_suffix')
+		)
 			->sizes($this->getOption('sizes'))
 			->set_length($this->getOption('length'))
+			->cloudDriver($this->getOption('cloud_driver', ''))
 			->upload();
 
 		return $result[0];

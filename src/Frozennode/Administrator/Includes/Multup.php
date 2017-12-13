@@ -5,81 +5,87 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Storage;
 
 //Use Admin\Libraries\Includes\Resize as Resize;
 /*
-* @package Multup
-* @version 0.2.0
-* @author Nick Kelly @ Frozen Node
-* @link github.com/
-*
-* Requires Validator, URL, and Str class from Laravel if used
-*
-*
-*/
+ * @package Multup
+ * @version 0.2.0
+ * @author Nick Kelly @ Frozen Node
+ * @link github.com/
+ *
+ * Requires Validator, URL, and Str class from Laravel if used
+ *
+ *
+ */
 class Multup {
 
 	/*
 		image array
-	*/
+	 */
 	private $image;
 
 	/*
 		string of laravel validation rules
-	*/
+	 */
 	private $rules;
 
 	/*
 		randomize uploaded filename
-	*/
+	 */
 	private $random;
 
 	/*
 		path relative to /public/ that the image should be saved in
-	*/
+	 */
 	private $path;
 
 	/*
 		id/name of the file input to find
-	*/
+	 */
 	private $input;
 
 	/*
 		How long the random filename should be
-	*/
+	 */
 	private $random_length = 32;
 
 	/*
-	*	Callback function for setting your own random filename
-	*/
+	 *	Callback function for setting your own random filename
+	 */
 	private $random_cb;
 
 	/*
-	*	Prefix name
-	*/
+	 *	Prefix name
+	 */
 	private $prefix = "";
 
 	/*
-	*	Suffix name
-	*/
+	 *	Suffix name
+	 */
 	private $suffix = "";
 
 	/*
-	* Sizing information for thumbs to create
-	* array ( width, height, crop_type, path_to_save, quality)
-	*/
+	 *	Cloud driver name
+	 */
+	private $cloud_driver = "";
+
+	/*
+	 * Sizing information for thumbs to create
+	 * array ( width, height, crop_type, path_to_save, quality)
+	 */
 	private $image_sizes;
 
 	/*
-	*	Upload callback function to be called after an image is done being uploaded
-	*	@var function/closure
-	*/
+	 *	Upload callback function to be called after an image is done being uploaded
+	 *	@var function/closure
+	 */
 	private $upload_callback;
 
 	/*
-	*	Arry of additional arguements to be passed into the callback function
-	*	@var array
-	*/
+	 *	Arry of additional arguements to be passed into the callback function
+	 *	@var array
+	 */
 	private $upload_callback_args;
 
 	/**
@@ -88,8 +94,8 @@ class Multup {
 	 */
 	public function __construct($input, $rules, $path, $random, $prefix, $suffix)
 	{
-		$this->input  = $input;
-		$this->rules  = $rules;
+		$this->input = $input;
+		$this->rules = $rules;
 		$this->path = $path;
 		$this->random = $random;
 		$this->prefix = $prefix;
@@ -107,13 +113,13 @@ class Multup {
 	 */
 	public static function open($input, $rules, $path, $random = true, $prefix = "", $suffix = "")
 	{
-		return new Multup( $input, $rules, $path, $random, $prefix, $suffix );
+		return new Multup($input, $rules, $path, $random, $prefix, $suffix);
 	}
 
 	/*
-	*	Set the length of the randomized filename
-	*   @param int $len
-	*/
+	 *	Set the length of the randomized filename
+	 *   @param int $len
+	 */
 	public function set_length($len)
 	{
 		$this->random_length = $len;
@@ -121,15 +127,22 @@ class Multup {
 		return $this;
 	}
 
+	public function cloudDriver($driver)
+	{
+		$this->cloud_driver = $driver;
+
+		return $this;
+	}
+
 	/*
-	*	Upload the image
-	*	@return array of results
-	*			each result will be an array() with keys:
-	*			errors array -> empty if saved properly, otherwise $validation->errors object
-	*			path string -> full URL to the file if saved, empty if not saved
-	*			filename string -> name of the saved file or file that could not be uploaded
-	*
-	*/
+	 *	Upload the image
+	 *	@return array of results
+	 *			each result will be an array() with keys:
+	 *			errors array -> empty if saved properly, otherwise $validation->errors object
+	 *			path string -> full URL to the file if saved, empty if not saved
+	 *			filename string -> name of the saved file or file that could not be uploaded
+	 *
+	 */
 	public function upload()
 	{
 
@@ -140,15 +153,14 @@ class Multup {
 
 		return $result;
 
-		if ($image)
-		{
+		if ($image) {
 			$this->image = array(
 				$this->input => array(
-					'name'      => $image->getClientOriginalName(),
-					'type'      => $image->getClientMimeType(),
-					'tmp_name'  => $image->getFilename(),
-					'error'     => $image->getError(),
-					'size'      => $image->getSize(),
+					'name' => $image->getClientOriginalName(),
+					'type' => $image->getClientMimeType(),
+					'tmp_name' => $image->getFilename(),
+					'error' => $image->getError(),
+					'size' => $image->getSize(),
 				)
 			);
 
@@ -157,7 +169,7 @@ class Multup {
 
 		return $result;
 
-		if(!is_array($images)){
+		if (!is_array($images)) {
 
 			$this->image = array($this->input => $images);
 
@@ -166,15 +178,15 @@ class Multup {
 		} else {
 			$size = $count($images['name']);
 
-			for($i = 0; $i < $size; $i++){
+			for ($i = 0; $i < $size; $i++) {
 
 				$this->image = array(
 					$this->input => array(
-						'name'      => $images['name'][$i],
-						'type'      => $images['type'][$i],
-						'tmp_name'  => $images['tmp_name'][$i],
-						'error'     => $images['error'][$i],
-						'size'      => $images['size'][$i]
+						'name' => $images['name'][$i],
+						'type' => $images['type'][$i],
+						'tmp_name' => $images['tmp_name'][$i],
+						'error' => $images['error'][$i],
+						'size' => $images['size'][$i]
 					)
 				);
 
@@ -187,8 +199,8 @@ class Multup {
 	}
 
 	/*
-	*	Upload the image
-	*/
+	 *	Upload the image
+	 */
 	private function upload_image()
 	{
 
@@ -200,37 +212,44 @@ class Multup {
 		$filename = '';
 		$resizes = '';
 
-		if($validation->fails()){
+		if ($validation->fails()) {
 			/* use the messages object for the erros */
 			$errors = implode('. ', $validation->messages()->all());
 		} else {
 
-			if($this->random == "random"){
-				if(is_callable($this->random_cb)){
-					$filename =  call_user_func( $this->random_cb, $original_name );
+			if ($this->random == "random") {
+				if (is_callable($this->random_cb)) {
+					$filename = call_user_func($this->random_cb, $original_name);
 				} else {
 					$ext = File::extension($original_name);
-					$filename = $this->generate_random_filename().'.'.$ext;
+					$filename = $this->generate_random_filename() . '.' . $ext;
 				}
-			} else if($this->random == "incremental"){
+			} else if ($this->random == "incremental") {
 				$filename = $this->generate_incremental_filename($original_name);
 			} else {
 				$filename = $original_name;
 			}
 
-			if($this->random !== "incremental"){
-				if($this->prefix !== "") $filename = $this->prefix.$filename;
-				if($this->suffix !== "") $filename = $filename.$this->suffix;
+			if ($this->random !== "incremental") {
+				if ($this->prefix !== "") $filename = $this->prefix . $filename;
+				if ($this->suffix !== "") $filename = $filename . $this->suffix;
 			}
 
 			/* upload the file */
-			$save = $this->image[$this->input]->move($this->path, $filename);
+			if ($this->cloud_driver) {
+				Storage::disk($this->cloud_driver)
+					->putFileAs($this->path, $this->image[$this->input], $filename);
+				$save = $this->image[$this->input];
+			} else {
+				$save = $this->image[$this->input]->move($this->path, $filename);
+			}
 			//$save = Input::upload($this->input, $this->path, $filename);
 
-			if($save){
-				$path = $this->path.$filename;
+			if ($save) {
 
-				if(is_array($this->image_sizes)){
+				$path = $this->path . $filename;
+
+				if (is_array($this->image_sizes)) {
 					$resizer = new Resize();
 					$resizes = $resizer->create($save, $this->path, $filename, $this->image_sizes);
 				}
@@ -240,44 +259,44 @@ class Multup {
 			}
 		}
 
-		return compact('errors', 'path', 'filename', 'original_name', 'resizes' );
+		return compact('errors', 'path', 'filename', 'original_name', 'resizes');
 	}
 	
 	/*
-	* Create incremental filename generation
-	*/
-	private function generate_incremental_filename($original_name,$count = "")
+	 * Create incremental filename generation
+	 */
+	private function generate_incremental_filename($original_name, $count = "")
 	{
 		$name = pathinfo($original_name, PATHINFO_FILENAME); 
 		// add prefix and suffix
-		$name = $this->prefix.$name.$this->suffix;
+		$name = $this->prefix . $name . $this->suffix;
 		$ext = File::extension($original_name);
-		$counter = $count != "" ? '_'.($count-1) : "";
+		$counter = $count != "" ? '_' . ($count - 1) : "";
 
-		if(!File::isFile($this->path.$name.$counter.".".$ext)){
+		if (!File::isFile($this->path . $name . $counter . "." . $ext)) {
 
-			return $name.$counter.".".$ext;
-		}else{
-			$count = $count != "" ? $count+1 : 1;
+			return $name . $counter . "." . $ext;
+		} else {
+			$count = $count != "" ? $count + 1 : 1;
 
-			return $this->generate_incremental_filename($original_name,$count);
+			return $this->generate_incremental_filename($original_name, $count);
 		}
 	}
 
 	/*
-	* Default random filename generation
-	*/
+	 * Default random filename generation
+	 */
 	private function generate_random_filename()
 	{
-		 return Str::random($this->random_length);
+		return Str::random($this->random_length);
 	}
 
 	/*
-	* Default random filename generation
-	*/
-	public function filename_callback( $func )
+	 * Default random filename generation
+	 */
+	public function filename_callback($func)
 	{
-		if(is_callable($func)){
+		if (is_callable($func)) {
 			$this->random_cb = $func;
 		}
 
@@ -287,10 +306,10 @@ class Multup {
 	/*
 		Set the callback function to be called after each image is done uploading
 		@var mixed anonymous function or string name of function
-	*/
-	public function after_upload( $cb, $args = '')
+	 */
+	public function after_upload($cb, $args = '')
 	{
-		if(is_callable($cb)){
+		if (is_callable($cb)) {
 			$this->upload_callback = $cb;
 			$this->upload_callback_args = $args;
 		} else {
@@ -300,15 +319,15 @@ class Multup {
 	}
 
 	/*
-	*	Sets the sizes for resizing the original
-	*  @param array(
-	*		array(
-	*			int $width , int $height , string 'exact, portrait, landscape, auto or crop', string 'path/to/file.jpg' , int $quality
-	*		)
-	*	)
-	*
-	*/
-	public function sizes( $sizes )
+	 *	Sets the sizes for resizing the original
+	 *  @param array(
+	 *		array(
+	 *			int $width , int $height , string 'exact, portrait, landscape, auto or crop', string 'path/to/file.jpg' , int $quality
+	 *		)
+	 *	)
+	 *
+	 */
+	public function sizes($sizes)
 	{
 		$this->image_sizes = $sizes;
 		return $this;
@@ -325,19 +344,19 @@ class Multup {
 			resize ->this will be empty as the resize has not yet occurred
 			filename -> the name of the successfully uploaded file
 		@return void
-	*/
-	private function post_upload_process( $args )
+	 */
+	private function post_upload_process($args)
 	{
 
-		if(empty($args['errors'])){
+		if (empty($args['errors'])) {
 			/* add the saved image to the images array thing */
 
-			if(is_callable($this->upload_callback)){
-				if(!empty($this->upload_callback_args) && is_array($this->upload_callback_args)){
+			if (is_callable($this->upload_callback)) {
+				if (!empty($this->upload_callback_args) && is_array($this->upload_callback_args)) {
 					$args = array_merge($this->upload_callback_args, $args);
 				}
 
-				$args['callback_result']  = call_user_func( $this->upload_callback, $args);
+				$args['callback_result'] = call_user_func($this->upload_callback, $args);
 			}
 
 		}

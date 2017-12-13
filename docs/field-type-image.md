@@ -24,6 +24,26 @@ The `image` field type should be a text-like type in your database. The image's 
 		)
 	)
 
+
+	//S3 configuration example
+
+
+	'image' => array(
+		'title' => 'Image',
+		'type' => 'image',
+		'location' => '/public/uploads/products/originals/',
+		'cloud_driver' => 's3',
+		'naming' => 'random',
+		'length' => 20,
+		'size_limit' => 2,
+		'display_raw_value' => false,
+		'sizes' => array(
+			array(65, 57, 'crop',  '/public/uploads/products/thumbs/small/', 100, 's3'),
+			array(220, 138, 'landscape', '/public/uploads/products/thumbs/medium/', 100, 's3'),
+			array(383, 276, 'fit', '/public/uploads/products/thumbs/full/', 100, 's3')
+		)
+	)
+
 In the edit form, an admin user will be presented with an image uploader. For the moment, this uploader only allows one image to be uploaded at a time.
 
 The required `location` option lets you define where the original image should be stored.
@@ -36,4 +56,6 @@ The optional `size_limit` option lets you set an integer size limit counted in m
 
 The optional `display_raw_value` option lets you put the raw value of the saved image source string into the image input. This is useful if you're using accessors, mutators, and [`setter fields`](/docs/fields#setter-option) to skip storing the image on your local server and instead upload it to a remote public image server.
 
-The optional `sizes` option lets you define as many resizes as you want. The format for these is: `array([width], [height], [method], [save path], [quality])`. The different methods are `exact`, `portrait`, `landscape`, `fit`, `auto`, `test` (like `auto` but if image is smaller use `exact`), and `crop`.
+The optional `sizes` option lets you define as many resizes as you want. The format for these is: `array([width], [height], [method], [save path], [quality], [cloud_driver])`. The different methods are `exact`, `portrait`, `landscape`, `fit`, `auto`, `test` (like `auto` but if image is smaller use `exact`), and `crop`.
+
+The optional `cloud_driver` option lets you define the filesystem drive to use. You need to define the `cloud_driver` option in each `sizes` item.
