@@ -1,5 +1,8 @@
 /vendor
 /vendor_alt
+/node_modules
+package.json
+yarn.lock
 composer.phar
 composer.lock
 .DS_Store
