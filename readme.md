@@ -81,6 +81,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ## Recent Changelog
 
+### 5.5.4
+- Added: Force secure assets option
+
 ### 5.5.3
 - Added: Image field upload to Storage (ex. S3)
 
