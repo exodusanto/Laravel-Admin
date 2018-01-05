@@ -253,7 +253,7 @@ class AdminController extends Controller {
 				$headers = $result->headers->all();
 				$this->session->put('administrator_download_response', array('file' => $file, 'headers' => $headers));
 
-				$response['download'] = route('admin_file_download');
+				$response['download'] = route('admin_file_download', array(), false);
 			}
 			//if it's a redirect, put the url into the redirect key so that javascript can transfer the user
 			else if (is_a($result, '\Illuminate\Http\RedirectResponse'))
@@ -320,7 +320,7 @@ class AdminController extends Controller {
 				$headers = $result->headers->all();
 				$this->session->put('administrator_download_response', array('file' => $file, 'headers' => $headers));
 
-				$response['download'] = route('admin_file_download');
+				$response['download'] = route('admin_file_download', array(), false);
 			}
 			//if it's a redirect, put the url into the redirect key so that javascript can transfer the user
 			else if (is_a($result, '\Illuminate\Http\RedirectResponse'))
@@ -604,7 +604,7 @@ class AdminController extends Controller {
 				$headers = $result->headers->all();
 				$this->session->put('administrator_download_response', array('file' => $file, 'headers' => $headers));
 
-				$response['download'] = route('admin_file_download');
+				$response['download'] = route('admin_file_download', array(), false);
 			}
 			//if it's a redirect, put the url into the redirect key so that javascript can transfer the user
 			else if (is_a($result, '\Illuminate\Http\RedirectResponse'))
