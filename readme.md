@@ -81,6 +81,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ## Recent Changelog
 
+### 5.5.5
+- Updated: Use relative path for ajax call and links
+
 ### 5.5.4
 - Added: Force secure assets option
 
