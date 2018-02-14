@@ -431,7 +431,13 @@ class AdminController extends Controller {
 	{
 		//get the stored path of the original
 		$path = $this->request->input('path');
-		$data = File::get($path);
+		
+		try{
+			$data = File::get($path);
+		}catch(\Exception $e){
+			abort(404);
+		}
+
 		$file = new SFile($path);
 
 		$headers = array(
