@@ -87,6 +87,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ## Recent Changelog
 
+### 5.6.3
+- Added: Cloud upload options
+
 ### 5.6.0
 - Support: Laravel 5.6
 
