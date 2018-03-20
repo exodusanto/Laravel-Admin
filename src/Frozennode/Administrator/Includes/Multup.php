@@ -71,6 +71,11 @@ class Multup {
 	private $cloud_driver = "";
 
 	/*
+	 *	Cloud upload options
+	 */
+	private $cloud_options = [];
+
+	/*
 	 * Sizing information for thumbs to create
 	 * array ( width, height, crop_type, path_to_save, quality)
 	 */
@@ -130,6 +135,13 @@ class Multup {
 	public function cloudDriver($driver)
 	{
 		$this->cloud_driver = $driver;
+
+		return $this;
+	}
+
+	public function cloudOptions($options = [])
+	{
+		$this->cloud_options = $options;
 
 		return $this;
 	}
@@ -238,10 +250,10 @@ class Multup {
 			/* upload the file */
 			if ($this->cloud_driver) {
 				Storage::disk($this->cloud_driver)
-					->putFileAs($this->path, $this->image[$this->input], $filename);
+					->putFileAs($this->path, $this->image[$this->input], $filename, $this->cloud_options);
 				$save = $this->image[$this->input];
 			} else {
-				$save = $this->image[$this->input]->move($this->path, $filename);
+				$save = $this->image[$this->input]->move($this->path, $filename, $this->cloud_options);
 			}
 			//$save = Input::upload($this->input, $this->path, $filename);
 

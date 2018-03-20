@@ -42,6 +42,7 @@ class Image extends File {
 			->sizes($this->getOption('sizes'))
 			->set_length($this->getOption('length'))
 			->cloudDriver($this->getOption('cloud_driver', ''))
+			->cloudOptions($this->getOption('cloud_options', ''))
 			->upload();
 
 		return $result[0];

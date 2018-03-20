@@ -57,9 +57,15 @@ class Resize
 
 	/*
 	 *	Storage cloud driver
-	 *	@var resource
+	 *	@var str
 	 */
 	private $cloud_driver;
+
+	/*
+	 *	Storage cloud driver
+	 *	@var arr
+	 */
+	private $cloud_options;
 
 	/*
 		Create multiple thumbs/resizes of an image
@@ -81,7 +87,8 @@ class Resize
 				$this->new_width = $size[0]; //$new_width;
 				$this->new_height = $size[1]; //$new_height;
 				$this->option = $size[2]; //crop type
-				$this->cloud_driver = $size[5] ?? '';
+				$this->cloud_driver = $size[5] ?? ''; //cloud driver
+				$this->cloud_options = $size[6] ?? [];//upload file options
 
 				//ensure that the directory path exists
 				if (!$this->cloud_driver && !is_dir($size[3])) {
@@ -167,7 +174,7 @@ class Resize
 						imagejpeg($this->image_resized, $tmpfname, $image_quality);
 
 						Storage::disk($this->cloud_driver)
-							->put($save_path, file_get_contents($tmpfname));
+							->put($save_path, file_get_contents($tmpfname), $this->cloud_options);
 					} else {
 						imagejpeg($this->image_resized, $save_path, $image_quality);
 					}
@@ -181,7 +188,7 @@ class Resize
 						imagegif($this->image_resized, $tmpfname);
 
 						Storage::disk($this->cloud_driver)
-							->put($save_path, file_get_contents($tmpfname));
+							->put($save_path, file_get_contents($tmpfname), $this->cloud_options);
 					} else {
 						imagegif($this->image_resized, $save_path);
 					}
@@ -201,7 +208,7 @@ class Resize
 						imagepng($this->image_resized, $tmpfname, $invert_scale_quality);
 
 						Storage::disk($this->cloud_driver)
-							->put($save_path, file_get_contents($tmpfname));
+							->put($save_path, file_get_contents($tmpfname), $this->cloud_options);
 					} else {
 						imagepng($this->image_resized, $save_path, $invert_scale_quality);
 					}
