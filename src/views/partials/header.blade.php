@@ -1,6 +1,6 @@
 <header>
 	<h1>
-		<a href="{{route('admin_dashboard')}}">{{ is_callable(config('administrator.title')) ? call_user_func(config('administrator.title')) : config('administrator.title') }}</a>
+		<a href="{{route('admin_dashboard', array(), false)}}">{{ is_callable(config('administrator.title')) ? call_user_func(config('administrator.title')) : config('administrator.title') }}</a>
 	</h1>
 
 	<a href="#" id="menu_button"><div></div></a>
@@ -29,7 +29,7 @@
 							@foreach (config('administrator.locales') as $lang)
 								@if (config('app.locale') != $lang)
 									<li>
-										<a href="{{route('admin_switch_locale', array($lang))}}">{{$lang}}</a>
+										<a href="{{route('admin_switch_locale', array($lang), false)}}">{{$lang}}</a>
 									</li>
 								@endif
 							@endforeach

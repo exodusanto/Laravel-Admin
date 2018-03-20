@@ -18,6 +18,12 @@ New Version
 
 ## Composer
 
+To install Administrator as a Composer package to be used with Laravel 5.6, simply run:
+
+```sh
+composer require "exodusanto/administrator: 5.6.*"
+```
+
 To install Administrator as a Composer package to be used with Laravel 5.5, simply run:
 
 ```sh
@@ -80,6 +86,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 
 ## Recent Changelog
+
+### 5.6.0
+- Support: Laravel 5.6
 
 ### 5.5.3
 - Added: Image field upload to Storage (ex. S3)

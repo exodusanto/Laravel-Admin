@@ -150,4 +150,11 @@ return array(
 	 */
 	'locales' => array(),
 
+	/**
+	 * Force assets url to https
+	 * 
+	 * @type boolean
+	 */
+	'force_https_assets' => false
+
 );
