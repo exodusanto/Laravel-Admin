@@ -39,7 +39,7 @@ View::composer('administrator::settings', function ($view) {
 	$config = app('itemconfig');
 	$fieldFactory = app('admin_field_factory');
 	$actionFactory = app('admin_action_factory');
-	$baseUrl = route('admin_dashboard', array(), false);
+	$baseUrl = route('admin_dashboard', array(), false);
 	$route = parse_url($baseUrl);
 
 	//add the view fields
