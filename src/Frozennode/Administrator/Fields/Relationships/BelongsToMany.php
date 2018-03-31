@@ -115,10 +115,11 @@ class BelongsToMany extends Relationship {
 		$query->havingRaw('COUNT(DISTINCT ' . $query->getConnection()->getTablePrefix() . $column2 . ') = ' . count($value));
 
 		//add select field
-		if ($selects && !in_array($column2, $selects))
-		{
-			$selects[] = $column2;
-		}
+		//commented because problem filter if match fields on pivot table and main table
+//		if ($selects && !in_array($column2, $selects))
+//		{
+//			$selects[] = $column2;
+//		}
 	}
 
 	/**
