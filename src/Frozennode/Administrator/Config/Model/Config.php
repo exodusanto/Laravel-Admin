@@ -540,7 +540,7 @@ class Config extends ConfigBase implements ConfigInterface {
 	 *
 	 * @return void
 	 */
-	public function runQueryFilter(\Illuminate\Database\Query\Builder &$query)
+	public function runQueryFilter(\Illuminate\Database\Query\Builder $query)
 	{
 		if ($filter = $this->getOption('query_filter'))
 		{

@@ -42,7 +42,7 @@ class HasOneOrMany extends Relationship {
 	 *
 	 * @return void
 	 */
-	public function filterQuery(QueryBuilder &$query, &$selects = null) {}
+	public function filterQuery(QueryBuilder $query, &$selects = null) {}
 
 	/**
 	 * For the moment this is an empty function until I can figure out a way to display HasOne and HasMany relationships on this model
@@ -62,7 +62,7 @@ class HasOneOrMany extends Relationship {
 	 *
 	 * @return void
 	 */
-	public function constrainQuery(EloquentBuilder &$query, $relatedModel, $constraint)
+	public function constrainQuery(EloquentBuilder $query, $relatedModel, $constraint)
 	{
 		$query->where($this->getOption('column'), '=', $constraint);
 	}

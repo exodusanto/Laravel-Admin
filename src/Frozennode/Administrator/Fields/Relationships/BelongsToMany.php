@@ -83,7 +83,7 @@ class BelongsToMany extends Relationship {
 	 *
 	 * @return void
 	 */
-	public function filterQuery(QueryBuilder &$query, &$selects = null)
+	public function filterQuery(QueryBuilder $query, &$selects = null)
 	{
 		//run the parent method
 		parent::filterQuery($query, $selects);
@@ -130,7 +130,7 @@ class BelongsToMany extends Relationship {
 	 *
 	 * @return void
 	 */
-	public function constrainQuery(EloquentBuilder &$query, $relatedModel, $constraint)
+	public function constrainQuery(EloquentBuilder $query, $relatedModel, $constraint)
 	{
 		//if the column hasn't been joined yet, join it
 		if (!$this->validator->isJoined($query, $this->getOption('table')))

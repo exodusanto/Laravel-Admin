@@ -645,7 +645,7 @@ class Factory {
 	 * @param array										$selectedItems
 	 * @param string									$relatedKeyTable
 	 */
-	public function filterBySearchTerm($term, EloquentBuilder &$query, Field $fieldObject, array $selectedItems, $relatedKeyTable)
+	public function filterBySearchTerm($term, EloquentBuilder $query, Field $fieldObject, array $selectedItems, $relatedKeyTable)
 	{
 		if ($term)
 		{
@@ -698,7 +698,7 @@ class Factory {
 	 *
 	 * @return array
 	 */
-	public function filterQueryBySelectedItems(EloquentBuilder &$query, array $selectedItems, Field $fieldObject, $relatedKeyTable)
+	public function filterQueryBySelectedItems(EloquentBuilder $query, array $selectedItems, Field $fieldObject, $relatedKeyTable)
 	{
 		$query->whereIn($relatedKeyTable, $selectedItems);
 
@@ -723,7 +723,7 @@ class Factory {
 	 *
 	 * @return array
 	 */
-	public function applyConstraints($constraints, EloquentBuilder &$query, Field $fieldObject)
+	public function applyConstraints($constraints, EloquentBuilder $query, Field $fieldObject)
 	{
 		$configConstraints = $fieldObject->getOption('constraints');
 

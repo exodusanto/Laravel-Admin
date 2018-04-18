@@ -69,7 +69,7 @@ class Boolean extends Field {
 	 *
 	 * @return void
 	 */
-	public function filterQuery(QueryBuilder &$query, &$selects = null)
+	public function filterQuery(QueryBuilder $query, &$selects = null)
 	{
 		//if the field isn't empty
 		$value = $this->getOption('value');

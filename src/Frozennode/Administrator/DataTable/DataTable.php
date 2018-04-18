@@ -218,7 +218,7 @@ class DataTable {
 	 * @param \Illuminate\Database\Query\Builder	$countQuery
 	 * @param array									$selects
 	 */
-	public function setFilters($filters, QueryBuilder &$query, QueryBuilder &$countQuery, &$selects)
+	public function setFilters($filters, QueryBuilder $query, QueryBuilder $countQuery, &$selects)
 	{
 		//then we set the filters
 		if ($filters && \is_array($filters))
