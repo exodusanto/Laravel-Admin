@@ -201,14 +201,14 @@ class Factory {
 	 */
 	public function validateOptions($name, $options)
 	{
-		if (is_string($options))
+		if (\is_string($options))
 		{
 			$name = $options;
 			$options = array();
 		}
 
 		//if the name is not a string or the options is not an array at this point, throw an error because we can't do anything with it
-		if (!is_string($name) || !is_array($options))
+		if (!\is_string($name) || !\is_array($options))
 		{
 			throw new \InvalidArgumentException("One of the fields in your " . $this->config->getOption('name') . " configuration file is invalid");
 		}
@@ -281,7 +281,7 @@ class Factory {
 		}
 
 		//if this is a settings page and a field was supplied that is excluded
-		if ($this->config->getType() === 'settings' && in_array($options['type'], $this->settingsFieldExclusions))
+		if ($this->config->getType() === 'settings' && \in_array($options['type'], $this->settingsFieldExclusions))
 		{
 			throw new \InvalidArgumentException('The ' . $options['type'] . ' field in your ' .
 							$this->config->getOption('name') . ' settings page cannot be used on a settings page');
@@ -644,13 +644,13 @@ class Factory {
 			});
 
 			//exclude the currently-selected items if there are any
-			if (count($selectedItems))
+			if (\count($selectedItems))
 			{
 				$query->whereNotIn($relatedKeyTable, $selectedItems);
 			}
 
 			//set up the limits
-			$query->take($fieldObject->getOption('num_options') + count($selectedItems));
+			$query->take($fieldObject->getOption('num_options') + \count($selectedItems));
 		}
 	}
 
@@ -666,7 +666,7 @@ class Factory {
 		if ($selectedItems)
 		{
 			//if this isn't an array, set it up as one
-			return is_array($selectedItems) ? $selectedItems : explode(',', $selectedItems);
+			return \is_array($selectedItems) ? $selectedItems : explode(',', $selectedItems);
 		}
 		else
 		{

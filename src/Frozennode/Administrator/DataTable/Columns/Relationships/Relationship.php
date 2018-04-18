@@ -161,19 +161,19 @@ class Relationship extends Column {
 
 		//build a regular expression for each parameter
 		foreach ($params as $key => $value) {
-			if (is_string($key)) {
+			if (\is_string($key)) {
 				$keys[] = "/:" . $key . "/";
 			} else {
 				$keys[] = '/[?]/';
 			}
 
-			if (is_string($value))
+			if (\is_string($value))
 				$values[$key] = "'" . $value . "'";
 
-			if (is_array($value))
+			if (\is_array($value))
 				$values[$key] = implode(',', $value);
 
-			if (is_null($value))
+			if (\is_null($value))
 				$values[$key] = 'NULL';
 		}
 

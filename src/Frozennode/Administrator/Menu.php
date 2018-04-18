@@ -52,7 +52,7 @@ class Menu {
 		foreach ($subMenu as $key => $item)
 		{
 			//if the item is a string, find its config
-			if (is_string($item))
+			if (\is_string($item))
 			{
 				//fetch the appropriate config file
 				$config = $this->configFactory->make($item);
@@ -69,7 +69,7 @@ class Menu {
 				}
 			}
 			//if the item is an array, recursively run this method on it
-			else if (is_array($item))
+			else if (\is_array($item))
 			{
 				$menu[$key] = $this->getMenu($item);
 

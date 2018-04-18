@@ -104,7 +104,7 @@ abstract class Relationship extends Field {
 			foreach ($constraints as $field => $rel)
 			{
 				//check if the supplied values are strings and that their methods exist on their respective models
-				if (is_string($field) && is_string($rel) && method_exists($model, $field))
+				if (\is_string($field) && \is_string($rel) && method_exists($model, $field))
 				{
 					$validConstraints[$field] = $rel;
 				}
@@ -156,7 +156,7 @@ abstract class Relationship extends Field {
 			$items = $relationshipItems;
 
 			// if no related items exist, add default item, if set in options
-			if (count($items) == 0 && array_key_exists('value', $options))
+			if (\count($items) == 0 && array_key_exists('value', $options))
 			{
 				$items = $relatedModel->where($relatedModel->getKeyName(), '=', $options['value'])->get();
 			}

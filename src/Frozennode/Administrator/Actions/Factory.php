@@ -109,7 +109,7 @@ class Factory {
 		$model = $this->config->getDataModel();
 
 		//if the name is not a string or the options is not an array at this point, throw an error because we can't do anything with it
-		if (!is_string($name) || !is_array($options))
+		if (!\is_string($name) || !\is_array($options))
 		{
 			throw new \InvalidArgumentException("A custom action in your  " . $this->config->getOption('action_name') . " configuration file is invalid");
 		}
@@ -119,11 +119,11 @@ class Factory {
 
 		//set the permission
 		$permission = $this->validator->arrayGet($options, 'permission', false);
-		$options['has_permission'] = is_callable($permission) ? $permission($model) : true;
+		$options['has_permission'] = \is_callable($permission) ? $permission($model) : true;
 
 		//check if the messages array exists
 		$options['messages'] = $this->validator->arrayGet($options, 'messages', array());
-		$options['messages'] = is_array($options['messages']) ? $options['messages'] : array();
+		$options['messages'] = \is_array($options['messages']) ? $options['messages'] : array();
 
 		return $options;
 	}
@@ -283,7 +283,7 @@ class Factory {
 			//loop over the actions to build the list
 			foreach ($permissions as $action => $callback)
 			{
-				if (is_callable($callback))
+				if (\is_callable($callback))
 				{
 					$this->actionPermissions[$action] = (bool) $callback($model);
 				}

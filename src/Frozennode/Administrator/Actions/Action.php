@@ -134,12 +134,12 @@ class Action {
 			$suppliedValue = $this->validator->arrayGet($options, $key);
 
 			//if it's a string, simply set it
-			if (is_string($suppliedValue))
+			if (\is_string($suppliedValue))
 			{
 				$options[$key] = $suppliedValue;
 			}
 			//if it's callable pass it the current model and run it
-			else if (is_callable($suppliedValue))
+			else if (\is_callable($suppliedValue))
 			{
 				$options[$key] = $suppliedValue($model);
 			}

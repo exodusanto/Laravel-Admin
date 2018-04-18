@@ -63,7 +63,7 @@ class AdministratorServiceProvider extends ServiceProvider {
 		{
 			//get the original validator class so we can set it back after creating our own
 			$originalValidator = LValidator::make(array(), array());
-			$originalValidatorClass = get_class($originalValidator);
+			$originalValidatorClass = \get_class($originalValidator);
 
 			//temporarily override the core resolver
 			LValidator::resolver(function($translator, $data, $rules, $messages, $customAttributes) use ($app)

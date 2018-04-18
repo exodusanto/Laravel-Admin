@@ -43,7 +43,7 @@ class AdminController extends Controller {
 		
 		$this->formRequestErrors = $this->resolveDynamicFormRequestErrors($request);
 
-		if ( ! is_null($this->layout))
+		if ( ! \is_null($this->layout))
 		{
 			$this->layout = view($this->layout);
 
@@ -135,7 +135,7 @@ class AdminController extends Controller {
 		
 		$save = $config->save($this->request, $fieldFactory->getEditFields(), $actionFactory->getActionPermissions(), $id);
 
-		if (is_string($save))
+		if (\is_string($save))
 		{
 			return response()->json(array(
 				'success' => false,
@@ -231,7 +231,7 @@ class AdminController extends Controller {
 		$result = $action->perform($prepared['query']);
 
 		//if the result is a string, return that as an error.
-		if (is_string($result))
+		if (\is_string($result))
 		{
 			return response()->json(array('success' => false, 'error' => $result));
 		}
@@ -289,7 +289,7 @@ class AdminController extends Controller {
 		app('admin_config_factory')->updateConfigOptions();
 
 		//if the result is a string, return that as an error.
-		if (is_string($result))
+		if (\is_string($result))
 		{
 			return response()->json(array('success' => false, 'error' => $result));
 		}
@@ -546,7 +546,7 @@ class AdminController extends Controller {
 		$config = app('itemconfig');
 		$save = $config->save($this->request, app('admin_field_factory')->getEditFields());
 
-		if (is_string($save))
+		if (\is_string($save))
 		{
 			return response()->json(array(
 				'success' => false,
@@ -588,7 +588,7 @@ class AdminController extends Controller {
 		app('admin_config_factory')->updateConfigOptions();
 
 		//if the result is a string, return that as an error.
-		if (is_string($result))
+		if (\is_string($result))
 		{
 			return response()->json(array('success' => false, 'error' => $result));
 		}
@@ -631,7 +631,7 @@ class AdminController extends Controller {
 	 */
 	public function switchLocale($locale)
 	{
-		if (in_array($locale, config('administrator.locales')))
+		if (\in_array($locale, config('administrator.locales')))
 		{
 			$this->session->put('administrator_locale', $locale);
 		}
@@ -663,7 +663,7 @@ class AdminController extends Controller {
 				//Parses the exceptions thrown by Illuminate\Foundation\Http\FormRequest
 				$errorMessages = $e->getResponse()->getContent();
 				$errorsArray = json_decode($errorMessages);
-				if (!$errorsArray && is_string ( $errorMessages )) {
+				if (!$errorsArray && \is_string ( $errorMessages )) {
 					return $errorMessages;
 				}
 				if ($errorsArray) {

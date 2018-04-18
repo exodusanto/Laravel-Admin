@@ -66,9 +66,9 @@ class Validator extends \Illuminate\Validation\Validator {
                 $this->each($key, [$rule]);
                 unset($rules[$key]);
             } else {
-                if (is_string($rule)) {
+                if (\is_string($rule)) {
                     $rules[$key] = explode('|', $rule);
-                } elseif (is_object($rule)) {
+                } elseif (\is_object($rule)) {
                     $rules[$key] = [$rule];
                 } else {
                     $rules[$key] = $rule;
@@ -99,13 +99,13 @@ class Validator extends \Illuminate\Validation\Validator {
 	 */
 	public function arrayGet($array, $key, $default = null)
 	{
-		if (is_null($key)) return $array;
+		if (\is_null($key)) return $array;
 
 		if (isset($array[$key])) return $array[$key];
 
 		foreach (explode('.', $key) as $segment)
 		{
-			if ( ! is_array($array) or ! array_key_exists($segment, $array))
+			if ( ! \is_array($array) or ! array_key_exists($segment, $array))
 			{
 				return value($default);
 			}
@@ -157,7 +157,7 @@ class Validator extends \Illuminate\Validation\Validator {
 	 */
 	public function validateArray($attribute, $value)
 	{
-		return is_array($value);
+		return \is_array($value);
 	}
 
 	/**
@@ -175,7 +175,7 @@ class Validator extends \Illuminate\Validation\Validator {
 			}
 		}
 
-		return $missing === count($parameters) || $missing === 0;
+		return $missing === \count($parameters) || $missing === 0;
 	}
 
 	/**
@@ -191,7 +191,7 @@ class Validator extends \Illuminate\Validation\Validator {
 	 */
 	public function validateCallable($attribute, $value, $parameters)
 	{
-		return is_callable($value);
+		return \is_callable($value);
 	}
 
 	/**
@@ -199,7 +199,7 @@ class Validator extends \Illuminate\Validation\Validator {
 	 */
 	public function validateString($attribute, $value)
 	{
-		return is_string($value);
+		return \is_string($value);
 	}
 
 	/**
@@ -207,7 +207,7 @@ class Validator extends \Illuminate\Validation\Validator {
 	 */
 	public function validateStringOrCallable($attribute, $value, $parameters)
 	{
-		return is_string($value) || is_callable($value);
+		return \is_string($value) || \is_callable($value);
 	}
 
 	/**

@@ -177,13 +177,13 @@ class Config extends ConfigBase implements ConfigInterface {
 		$validation = $this->validateData($data, $rules, $this->getOption('messages'));
 
 		//if a string was kicked back, it's an error, so return it
-		if (is_string($validation)) return $validation;
+		if (\is_string($validation)) return $validation;
 
 		//run the beforeSave function if provided
 		$beforeSave = $this->runBeforeSave($data);
 
 		//if a string was kicked back, it's an error, so return it
-		if (is_string($beforeSave)) return $beforeSave;
+		if (\is_string($beforeSave)) return $beforeSave;
 
 		//Save the JSON data
 		$this->putToJson($data);
@@ -203,12 +203,12 @@ class Config extends ConfigBase implements ConfigInterface {
 	{
 		$beforeSave = $this->getOption('before_save');
 
-		if (is_callable($beforeSave))
+		if (\is_callable($beforeSave))
 		{
 			$bs = $beforeSave($data);
 
 			//if a string is returned, assume it's an error and kick it back
-			if (is_string($bs))
+			if (\is_string($bs))
 			{
 				return $bs;
 			}

@@ -181,14 +181,14 @@ class Factory {
 	 */
 	public function parseOptions($name, $options)
 	{
-		if (is_string($options))
+		if (\is_string($options))
 		{
 			$name = $options;
 			$options = array();
 		}
 
 		//if the name is not a string or the options is not an array at this point, throw an error because we can't do anything with it
-		if (!is_string($name) || !is_array($options))
+		if (!\is_string($name) || !\is_array($options))
 		{
 			throw new \InvalidArgumentException("One of the columns in your " . $this->config->getOption('name') . " model configuration file is invalid");
 		}
