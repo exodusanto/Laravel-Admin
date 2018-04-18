@@ -58,7 +58,7 @@ class Menu {
 				$config = $this->configFactory->make($item);
 
 				//if a config object was returned and if the permission passes, add the item to the menu
-				if (is_a($config, 'Frozennode\Administrator\Config\Config') && $config->getOption('permission'))
+				if (is_a($config, \Frozennode\Administrator\Config\Config::class) && $config->getOption('permission'))
 				{
 					$menu[$item] = $config->getOption('title');
 				}

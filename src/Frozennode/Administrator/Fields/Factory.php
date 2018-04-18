@@ -6,6 +6,20 @@ use Frozennode\Administrator\Config\ConfigInterface;
 use Illuminate\Database\DatabaseManager as DB;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Frozennode\Administrator\Fields\Relationships\HasMany;
+use Frozennode\Administrator\Fields\Relationships\HasOne;
+use Frozennode\Administrator\Fields\Relationships\BelongsToMany;
+use Frozennode\Administrator\Fields\Relationships\BelongsTo;
+use Frozennode\Administrator\Fields\Color;
+use Frozennode\Administrator\Fields\File;
+use Frozennode\Administrator\Fields\Image;
+use Frozennode\Administrator\Fields\Enum;
+use Frozennode\Administrator\Fields\Boolean;
+use Frozennode\Administrator\Fields\Number;
+use Frozennode\Administrator\Fields\Time;
+use Frozennode\Administrator\Fields\Password;
+use Frozennode\Administrator\Fields\Text;
+use Frozennode\Administrator\Fields\Key;
 
 class Factory {
 
@@ -15,27 +29,27 @@ class Factory {
 	 * @var array
 	 */
 	protected $fieldTypes = array(
-		'key' => 'Frozennode\\Administrator\\Fields\\Key',
-		'text' => 'Frozennode\\Administrator\\Fields\\Text',
-		'textarea' => 'Frozennode\\Administrator\\Fields\\Text',
-		'wysiwyg' => 'Frozennode\\Administrator\\Fields\\Text',
-		'markdown' => 'Frozennode\\Administrator\\Fields\\Text',
-		'password' => 'Frozennode\\Administrator\\Fields\\Password',
-		'date' => 'Frozennode\\Administrator\\Fields\\Time',
-		'time' => 'Frozennode\\Administrator\\Fields\\Time',
-		'datetime' => 'Frozennode\\Administrator\\Fields\\Time',
-		'number' => 'Frozennode\\Administrator\\Fields\\Number',
-		'bool' => 'Frozennode\\Administrator\\Fields\\Boolean',
-		'enum' => 'Frozennode\\Administrator\\Fields\\Enum',
-		'image' => 'Frozennode\\Administrator\\Fields\\Image',
-		'file' => 'Frozennode\\Administrator\\Fields\\File',
-		'color' => 'Frozennode\\Administrator\\Fields\\Color',
+		'key' => Key::class,
+		'text' => Text::class,
+		'textarea' => Text::class,
+		'wysiwyg' => Text::class,
+		'markdown' => Text::class,
+		'password' => Password::class,
+		'date' => Time::class,
+		'time' => Time::class,
+		'datetime' => Time::class,
+		'number' => Number::class,
+		'bool' => Boolean::class,
+		'enum' => Enum::class,
+		'image' => Image::class,
+		'file' => File::class,
+		'color' => Color::class,
 
 		//relationships
-		'belongs_to' => 'Frozennode\\Administrator\\Fields\\Relationships\\BelongsTo',
-		'belongs_to_many' => 'Frozennode\\Administrator\\Fields\\Relationships\\BelongsToMany',
-		'has_one' => 'Frozennode\\Administrator\\Fields\\Relationships\\HasOne',
-		'has_many' => 'Frozennode\\Administrator\\Fields\\Relationships\\HasMany',
+		'belongs_to' => BelongsTo::class,
+		'belongs_to_many' => BelongsToMany::class,
+		'has_one' => HasOne::class,
+		'has_many' => HasMany::class,
 
 	);
 
@@ -464,7 +478,7 @@ class Factory {
 			else
 			{
 				//if this is a collection, convert it to an array
-				if (is_a($model->$name, 'Illuminate\Database\Eloquent\Collection'))
+				if (is_a($model->$name, EloquentCollection::class))
 				{
 					$dataModel[$name] = $model->$name->toArray();
 				}

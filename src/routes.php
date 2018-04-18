@@ -1,12 +1,16 @@
 <?php
 
+use Frozennode\Administrator\Http\Middleware\ValidateAdmin;
+use Frozennode\Administrator\Http\Middleware\ValidateSettings;
+use Frozennode\Administrator\Http\Middleware\ValidateModel;
+use Frozennode\Administrator\Http\Middleware\PostValidate;
 use Illuminate\Support\Facades\Route;
 
 /**
  * Temperary solution for middleware in routes
  * TODO: remove in favor of setting the config for middleware outside of the routes file
  */
-$middleware_array = array('Frozennode\Administrator\Http\Middleware\ValidateAdmin');
+$middleware_array = array(ValidateAdmin::class);
 if(is_array(config('administrator.middleware'))) {
     $middleware_array = array_merge(config('administrator.middleware'), $middleware_array);
 }
@@ -34,7 +38,7 @@ Route::group(array('domain' => config('administrator.domain'), 'prefix' => confi
 		'uses' => 'Frozennode\Administrator\AdminController@page'
 	));
 
-	Route::group(array('middleware' => ['Frozennode\Administrator\Http\Middleware\ValidateSettings', 'Frozennode\Administrator\Http\Middleware\PostValidate']), function()
+	Route::group(array('middleware' => [ValidateSettings::class, PostValidate::class]), function()
 	{
 		//Settings Pages
 		Route::get('settings/{settings}', array(
@@ -74,7 +78,7 @@ Route::group(array('domain' => config('administrator.domain'), 'prefix' => confi
 	));
 
 	//The route group for all other requests needs to validate admin, model, and add assets
-	Route::group(array('middleware' => ['Frozennode\Administrator\Http\Middleware\ValidateModel', 'Frozennode\Administrator\Http\Middleware\PostValidate']), function()
+	Route::group(array('middleware' => [ValidateModel::class, PostValidate::class]), function()
 	{
 		//Model Index
 		Route::get('{model}', array(

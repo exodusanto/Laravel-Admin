@@ -17,7 +17,7 @@ class BelongsTo extends Relationship {
 	 *
 	 * @var string
 	 */
-	const BELONGS_TO = 'Illuminate\\Database\\Eloquent\\Relations\\BelongsTo';
+	const BELONGS_TO = \Illuminate\Database\Eloquent\Relations\BelongsTo::class;
 
 	/**
 	 * Builds the necessary fields on the object

@@ -2,6 +2,8 @@
 namespace Frozennode\Administrator;
 
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 class Validator extends \Illuminate\Validation\Validator {
 
@@ -127,7 +129,7 @@ class Validator extends \Illuminate\Validation\Validator {
 	public function isJoined($query, $table)
 	{
 		$tableFound = false;
-		$query = is_a($query, 'Illuminate\Database\Query\Builder') ? $query : $query->getQuery();
+		$query = is_a($query, Builder::class) ? $query : $query->getQuery();
 
 		if ($query->joins)
 		{
@@ -215,7 +217,7 @@ class Validator extends \Illuminate\Validation\Validator {
 	 */
 	public function validateEloquent($attribute, $value, $parameters)
 	{
-		return class_exists($value) && is_a(new $value, 'Illuminate\Database\Eloquent\Model');
+		return class_exists($value) && is_a(new $value, Model::class);
 	}
 
 }

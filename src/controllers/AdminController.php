@@ -6,6 +6,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
 use Symfony\Component\HttpFoundation\File\File as SFile;
+use Illuminate\Http\RedirectResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * Handles all requests related to managing the data models
@@ -247,7 +249,7 @@ class AdminController extends Controller {
 			$response = array('success' => true);
 
 			//if it's a download response, flash the response to the session and return the download link
-			if (is_a($result, 'Symfony\Component\HttpFoundation\BinaryFileResponse'))
+			if (is_a($result, BinaryFileResponse::class))
 			{
 				$file = $result->getFile()->getRealPath();
 				$headers = $result->headers->all();
@@ -256,7 +258,7 @@ class AdminController extends Controller {
 				$response['download'] = route('admin_file_download', array(), false);
 			}
 			//if it's a redirect, put the url into the redirect key so that javascript can transfer the user
-			else if (is_a($result, '\Illuminate\Http\RedirectResponse'))
+			else if (is_a($result, RedirectResponse::class))
 			{
 				$response['redirect'] = $result->getTargetUrl();
 			}
@@ -314,7 +316,7 @@ class AdminController extends Controller {
 			$response = array('success' => true, 'data' => $model->toArray());
 
 			//if it's a download response, flash the response to the session and return the download link
-			if (is_a($result, 'Symfony\Component\HttpFoundation\BinaryFileResponse'))
+			if (is_a($result, BinaryFileResponse::class))
 			{
 				$file = $result->getFile()->getRealPath();
 				$headers = $result->headers->all();
@@ -323,7 +325,7 @@ class AdminController extends Controller {
 				$response['download'] = route('admin_file_download', array(), false);
 			}
 			//if it's a redirect, put the url into the redirect key so that javascript can transfer the user
-			else if (is_a($result, '\Illuminate\Http\RedirectResponse'))
+			else if (is_a($result, RedirectResponse::class))
 			{
 				$response['redirect'] = $result->getTargetUrl();
 			}
@@ -604,7 +606,7 @@ class AdminController extends Controller {
 			$response = array('success' => true, 'actions' => $actionFactory->getActionsOptions(true));
 
 			//if it's a download response, flash the response to the session and return the download link
-			if (is_a($result, 'Symfony\Component\HttpFoundation\BinaryFileResponse'))
+			if (is_a($result, BinaryFileResponse::class))
 			{
 				$file = $result->getFile()->getRealPath();
 				$headers = $result->headers->all();
@@ -613,7 +615,7 @@ class AdminController extends Controller {
 				$response['download'] = route('admin_file_download', array(), false);
 			}
 			//if it's a redirect, put the url into the redirect key so that javascript can transfer the user
-			else if (is_a($result, '\Illuminate\Http\RedirectResponse'))
+			else if (is_a($result, RedirectResponse::class))
 			{
 				$response['redirect'] = $result->getTargetUrl();
 			}
