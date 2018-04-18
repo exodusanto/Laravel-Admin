@@ -48,12 +48,12 @@
 	}
 
 	div.item_edit form.edit_form div.markdown textarea {
-		width: <?php echo intval(($formWidth - 75) / 2) - 12 ?>px !important;
-		max-width: <?php echo intval(($formWidth - 75) / 2) - 12 ?>px !important;
+		width: <?php echo (int)(($formWidth - 75) / 2) - 12 ?>px !important;
+		max-width: <?php echo (int)(($formWidth - 75) / 2) - 12 ?>px !important;
 	}
 
 	div.item_edit form.edit_form div.markdown div.preview {
-		width: <?php echo intval(($formWidth - 75) / 2) ?>px !important;
+		width: <?php echo (int)(($formWidth - 75) / 2) ?>px !important;
 	}
 
 	div.item_edit form.edit_form input[type="text"], div.item_edit form.edit_form input[type="password"], div.item_edit form.edit_form textarea {

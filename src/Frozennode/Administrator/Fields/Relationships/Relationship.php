@@ -185,7 +185,7 @@ abstract class Relationship extends Field {
 		{
 			$result[] = array(
 				'id' => $option->{$keyField},
-				'text' => strval($option->{$nameField})
+				'text' => (string)$option->{$nameField}
 			);
 		}
 

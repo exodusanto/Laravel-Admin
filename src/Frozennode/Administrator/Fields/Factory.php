@@ -756,7 +756,7 @@ class Factory {
 		{
 			$return[] = array(
 				'id' => $m->getKey(),
-				'text' => strval($m->{$field->getOption('name_field')}),
+				'text' => (string)$m->{$field->getOption('name_field')},
 			);
 		}
 
