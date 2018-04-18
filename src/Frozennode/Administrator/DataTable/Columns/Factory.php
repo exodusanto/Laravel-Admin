@@ -1,6 +1,7 @@
 <?php
 namespace Frozennode\Administrator\DataTable\Columns;
 
+use Frozennode\Administrator\Util;
 use Frozennode\Administrator\Validator;
 use Frozennode\Administrator\Config\ConfigInterface;
 use Illuminate\Database\DatabaseManager as DB;
@@ -209,7 +210,7 @@ class Factory {
 	public function getColumns()
 	{
 		//make sure we only run this once and then return the cached version
-		if (!\count($this->columns))
+		if (!Util::count($this->columns))
 		{
 			foreach ($this->config->getOption('columns') as $name => $options)
 			{
@@ -230,7 +231,7 @@ class Factory {
 	public function getColumnOptions()
 	{
 		//make sure we only run this once and then return the cached version
-		if (!\count($this->columnOptions))
+		if (!Util::count($this->columnOptions))
 		{
 			foreach ($this->getColumns() as $column)
 			{
@@ -251,7 +252,7 @@ class Factory {
 	public function getIncludedColumns(array $fields)
 	{
 		//make sure we only run this once and then return the cached version
-		if (!\count($this->includedColumns))
+		if (!Util::count($this->includedColumns))
 		{
 			$model = $this->config->getDataModel();
 
@@ -294,7 +295,7 @@ class Factory {
 	public function getRelatedColumns()
 	{
 		//make sure we only run this once and then return the cached version
-		if (!\count($this->relatedColumns))
+		if (!Util::count($this->relatedColumns))
 		{
 			foreach ($this->getColumns() as $column)
 			{
@@ -316,7 +317,7 @@ class Factory {
 	public function getComputedColumns()
 	{
 		//make sure we only run this once and then return the cached version
-		if (!\count($this->computedColumns))
+		if (!Util::count($this->computedColumns))
 		{
 			foreach ($this->getColumns() as $column)
 			{

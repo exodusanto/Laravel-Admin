@@ -1,6 +1,7 @@
 <?php
 namespace Frozennode\Administrator\Fields\Relationships;
 
+use Frozennode\Administrator\Util;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 
 class HasMany extends HasOneOrMany {
@@ -98,7 +99,7 @@ class HasMany extends HasOneOrMany {
 		$query->whereIn($column2, $value);
 
 		//add having clauses
-		$query->havingRaw('COUNT(DISTINCT ' . $query->getConnection()->getTablePrefix() . $column2 . ') = ' . \count($value));
+		$query->havingRaw('COUNT(DISTINCT ' . $query->getConnection()->getTablePrefix() . $column2 . ') = ' . Util::count($value));
 
 		//add select field
 		if ($selects && !\in_array($column2, $selects))

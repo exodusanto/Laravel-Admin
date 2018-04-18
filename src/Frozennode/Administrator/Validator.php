@@ -177,7 +177,7 @@ class Validator extends \Illuminate\Validation\Validator {
 			}
 		}
 
-		return $missing === \count($parameters) || $missing === 0;
+		return $missing === Util::count($parameters) || $missing === 0;
 	}
 
 	/**

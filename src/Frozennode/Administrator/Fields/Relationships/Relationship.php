@@ -2,6 +2,7 @@
 namespace Frozennode\Administrator\Fields\Relationships;
 
 use Frozennode\Administrator\Fields\Field;
+use Frozennode\Administrator\Util;
 
 abstract class Relationship extends Field {
 
@@ -96,7 +97,7 @@ abstract class Relationship extends Field {
 		$model = $this->config->getDataModel();
 
 		//set up and check the constraints
-		if (\count($constraints))
+		if (Util::count($constraints))
 		{
 			$validConstraints = array();
 
@@ -156,7 +157,7 @@ abstract class Relationship extends Field {
 			$items = $relationshipItems;
 
 			// if no related items exist, add default item, if set in options
-			if (\count($items) == 0 && array_key_exists('value', $options))
+			if (Util::count($items) == 0 && array_key_exists('value', $options))
 			{
 				$items = $relatedModel->where($relatedModel->getKeyName(), '=', $options['value'])->get();
 			}
