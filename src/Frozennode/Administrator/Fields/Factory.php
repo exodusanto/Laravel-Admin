@@ -177,7 +177,7 @@ class Factory {
 		$options = $this->validateOptions($name, $options);
 
 		//make sure the 'title' option is set
-		$options['title'] = isset($options['title']) ? $options['title'] : $options['field_name'];
+		$options['title'] = $options['title'] ?? $options['field_name'];
 
 		//ensure the type is set and then check that the field type exists
 		$this->ensureTypeIsSet($options);
@@ -470,7 +470,7 @@ class Factory {
 				}
 				else
 				{
-					$dataModel[$name] = isset($options['value']) ? $options['value'] : null;
+					$dataModel[$name] = $options['value'] ?? null;
 				}
 			}
 		}

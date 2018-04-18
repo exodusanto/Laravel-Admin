@@ -108,7 +108,7 @@ class Relationship extends Column {
 		$sql = $query->toSql();
 		$fullQuery = $this->interpolateQuery($sql, $connection->prepareBindings($query->getBindings()));
 		$split = explode(' where ', $fullQuery);
-		return isset($split[1]) ? $split[1] : '';
+		return $split[1] ?? '';
 	}
 
 	/**

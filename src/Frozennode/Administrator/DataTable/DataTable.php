@@ -338,8 +338,8 @@ class DataTable {
 
 		//set the sort values
 		$this->sort = array(
-			'field' => isset($sort['field']) ? $sort['field'] : $this->config->getDataModel()->getKeyName(),
-			'direction' => isset($sort['direction']) ? $sort['direction'] : 'desc',
+			'field' => $sort['field'] ?? $this->config->getDataModel()->getKeyName(),
+			'direction' => $sort['direction'] ?? 'desc',
 		);
 
 		//if the sort direction isn't valid, set it to 'desc'
