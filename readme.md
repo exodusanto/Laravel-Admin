@@ -87,6 +87,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ## Recent Changelog
 
+### 5.6.5
+- Support: PHP 7.2 (#22)
+
 ### 5.6.3
 - Added: Cloud upload options
 
@@ -125,27 +128,4 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 - Testfix: Fixed failing tests
 
 ### 5.0.9
-- Bugfix: Fix for datetimepicker partially being covered by top menu  
-
-### 5.0.8
-- Bugfix: Rename Bool class to Boolean to fix PHP 7 
-- Bugfix: added missing custom attribute field
-
-### 5.0.7
-- Bugfix: Fixed boolean true bug 
-- Bugfix: Fixes a bug where soft deletes are not being properly detected in L5
-
-### 5.0.6
-- Added: Support for custom domains in the admin routes
-- Added: Ability to access the model from withinthe column output renderer
-- Added: Dynamic Form Request Validation
-
-### 5.0.5
-- Added: Added password field to the settings view
-- Added: Romanian Language
-- Added: Basic HasMany Implementation along with re-ordering support
-- Bugfix: Autocomplete working with default value
-- Bugfix: Adding missing session to Admin Controller
-- Bugfix: Fixed improper handling of filter value 0 for Enum/Text field
-- Docfix: Simplified the composer command in the install docs to match the packagist.org instuctions
-- Docfix: Changed the type definition for global_rows_per_page to int instead of Null|nt since Null causes divide by 0 error
+- Bugfix: Fix for datetimepicker partially being covered by top menu
