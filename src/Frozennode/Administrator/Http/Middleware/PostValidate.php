@@ -1,6 +1,9 @@
 <?php namespace Frozennode\Administrator\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 
 class PostValidate {
 
@@ -37,7 +40,7 @@ class PostValidate {
 		}
 
 		//otherwise if this is a response, return that
-		if (is_a($p, 'Illuminate\Http\JsonResponse') || is_a($p, 'Illuminate\Http\Response') || is_a($p, 'Illuminate\\Http\\RedirectResponse'))
+		if (is_a($p, JsonResponse::class) || is_a($p, Response::class) || is_a($p, RedirectResponse::class))
 		{
 			return $p;
 		}

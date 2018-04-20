@@ -1,6 +1,7 @@
 <?php
 namespace Frozennode\Administrator\DataTable\Columns;
 
+use Frozennode\Administrator\Util;
 use Frozennode\Administrator\Validator;
 use Frozennode\Administrator\Config\ConfigInterface;
 use Illuminate\Database\DatabaseManager as DB;
@@ -8,6 +9,8 @@ use Illuminate\Database\DatabaseManager as DB;
 use Frozennode\Administrator\DataTable\Columns\Relationships\BelongsTo;
 use Frozennode\Administrator\DataTable\Columns\Relationships\BelongsToMany;
 use Frozennode\Administrator\DataTable\Columns\Relationships\HasOneOrMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Factory {
 
@@ -72,28 +75,28 @@ class Factory {
 	 *
 	 * @var string
 	 */
-	const BELONGS_TO = 'Illuminate\\Database\\Eloquent\\Relations\\BelongsTo';
+	const BELONGS_TO = \Illuminate\Database\Eloquent\Relations\BelongsTo::class;
 
 	/**
 	 * The class name of a BelongsToMany relationship
 	 *
 	 * @var string
 	 */
-	const BELONGS_TO_MANY = 'Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany';
+	const BELONGS_TO_MANY = \Illuminate\Database\Eloquent\Relations\BelongsToMany::class;
 
 	/**
 	 * The class name of a HasMany relationship
 	 *
 	 * @var string
 	 */
-	const HAS_MANY = 'Illuminate\\Database\\Eloquent\\Relations\\HasMany';
+	const HAS_MANY = HasMany::class;
 
 	/**
 	 * The class name of a HasOne relationship
 	 *
 	 * @var string
 	 */
-	const HAS_ONE = 'Illuminate\\Database\\Eloquent\\Relations\\HasOne';
+	const HAS_ONE = HasOne::class;
 
 	/**
 	 * Create a new action Factory instance
@@ -181,14 +184,14 @@ class Factory {
 	 */
 	public function parseOptions($name, $options)
 	{
-		if (is_string($options))
+		if (\is_string($options))
 		{
 			$name = $options;
 			$options = array();
 		}
 
 		//if the name is not a string or the options is not an array at this point, throw an error because we can't do anything with it
-		if (!is_string($name) || !is_array($options))
+		if (!\is_string($name) || !\is_array($options))
 		{
 			throw new \InvalidArgumentException("One of the columns in your " . $this->config->getOption('name') . " model configuration file is invalid");
 		}
@@ -207,7 +210,7 @@ class Factory {
 	public function getColumns()
 	{
 		//make sure we only run this once and then return the cached version
-		if (!sizeof($this->columns))
+		if (!Util::count($this->columns))
 		{
 			foreach ($this->config->getOption('columns') as $name => $options)
 			{
@@ -228,7 +231,7 @@ class Factory {
 	public function getColumnOptions()
 	{
 		//make sure we only run this once and then return the cached version
-		if (!sizeof($this->columnOptions))
+		if (!Util::count($this->columnOptions))
 		{
 			foreach ($this->getColumns() as $column)
 			{
@@ -249,7 +252,7 @@ class Factory {
 	public function getIncludedColumns(array $fields)
 	{
 		//make sure we only run this once and then return the cached version
-		if (!sizeof($this->includedColumns))
+		if (!Util::count($this->includedColumns))
 		{
 			$model = $this->config->getDataModel();
 
@@ -274,7 +277,7 @@ class Factory {
 			//make sure any belongs_to fields that aren't on the columns list are included
 			foreach ($fields as $field)
 			{
-				if (is_a($field, 'Frozennode\\Administrator\\Fields\\Relationships\\BelongsTo'))
+				if (is_a($field, \Frozennode\Administrator\Fields\Relationships\BelongsTo::class))
 				{
 					$this->includedColumns[$field->getOption('foreign_key')] = $model->getTable().'.'.$field->getOption('foreign_key');
 				}
@@ -292,7 +295,7 @@ class Factory {
 	public function getRelatedColumns()
 	{
 		//make sure we only run this once and then return the cached version
-		if (!sizeof($this->relatedColumns))
+		if (!Util::count($this->relatedColumns))
 		{
 			foreach ($this->getColumns() as $column)
 			{
@@ -314,7 +317,7 @@ class Factory {
 	public function getComputedColumns()
 	{
 		//make sure we only run this once and then return the cached version
-		if (!sizeof($this->computedColumns))
+		if (!Util::count($this->computedColumns))
 		{
 			foreach ($this->getColumns() as $column)
 			{

@@ -26,8 +26,8 @@ class Enum extends Field {
 		$dataOptions = $options['options'];
 
 		// Check if function
-		if(is_callable($dataOptions)){
-			$dataOptions = call_user_func($dataOptions);
+		if(\is_callable($dataOptions)){
+			$dataOptions = \call_user_func($dataOptions);
 		}
 
 		$options['options'] = array();
@@ -77,7 +77,7 @@ class Enum extends Field {
 	 *
 	 * @return void
 	 */
-	public function filterQuery(QueryBuilder &$query, &$selects = null)
+	public function filterQuery(QueryBuilder $query, &$selects = null)
 	{
 		//run the parent method
 		parent::filterQuery($query, $selects);

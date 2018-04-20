@@ -116,7 +116,7 @@ abstract class Field {
 		//run the visible property closure if supplied
 		$visible = $this->validator->arrayGet($options, 'visible');
 
-		if (is_callable($visible))
+		if (\is_callable($visible))
 		{
 			$options['visible'] = $visible($this->config->getDataModel()) ? true : false;
 		}
@@ -124,7 +124,7 @@ abstract class Field {
 		//run the editable property's closure if supplied
 		$editable = $this->validator->arrayGet($options, 'editable');
 
-		if (isset($editable) && is_callable($editable))
+		if (isset($editable) && \is_callable($editable))
 		{
 			$options['editable'] = $editable($this->config->getDataModel());
 		}
@@ -170,7 +170,7 @@ abstract class Field {
 	 */
 	public function fillModel(&$model, $input)
 	{
-		$model->{$this->getOption('field_name')} = is_null($input) ? '' : $input;
+		$model->{$this->getOption('field_name')} = \is_null($input) ? '' : $input;
 	}
 
 	/**
@@ -195,7 +195,7 @@ abstract class Field {
 	 *
 	 * @return void
 	 */
-	public function filterQuery(QueryBuilder &$query, &$selects = null)
+	public function filterQuery(QueryBuilder $query, &$selects = null)
 	{
 		$model = $this->config->getDataModel();
 
@@ -223,7 +223,7 @@ abstract class Field {
 	 */
 	public function getFilterValue($value)
 	{
-		if (($value!==0 && $value!=='0' && empty($value)) || (is_string($value) && trim($value) === ''))
+		if (($value!==0 && $value!=='0' && empty($value)) || (\is_string($value) && trim($value) === ''))
 		{
 			return false;
 		}

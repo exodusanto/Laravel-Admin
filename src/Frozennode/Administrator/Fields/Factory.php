@@ -1,11 +1,26 @@
 <?php
 namespace Frozennode\Administrator\Fields;
 
+use Frozennode\Administrator\Util;
 use Frozennode\Administrator\Validator;
 use Frozennode\Administrator\Config\ConfigInterface;
 use Illuminate\Database\DatabaseManager as DB;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Frozennode\Administrator\Fields\Relationships\HasMany;
+use Frozennode\Administrator\Fields\Relationships\HasOne;
+use Frozennode\Administrator\Fields\Relationships\BelongsToMany;
+use Frozennode\Administrator\Fields\Relationships\BelongsTo;
+use Frozennode\Administrator\Fields\Color;
+use Frozennode\Administrator\Fields\File;
+use Frozennode\Administrator\Fields\Image;
+use Frozennode\Administrator\Fields\Enum;
+use Frozennode\Administrator\Fields\Boolean;
+use Frozennode\Administrator\Fields\Number;
+use Frozennode\Administrator\Fields\Time;
+use Frozennode\Administrator\Fields\Password;
+use Frozennode\Administrator\Fields\Text;
+use Frozennode\Administrator\Fields\Key;
 
 class Factory {
 
@@ -15,27 +30,27 @@ class Factory {
 	 * @var array
 	 */
 	protected $fieldTypes = array(
-		'key' => 'Frozennode\\Administrator\\Fields\\Key',
-		'text' => 'Frozennode\\Administrator\\Fields\\Text',
-		'textarea' => 'Frozennode\\Administrator\\Fields\\Text',
-		'wysiwyg' => 'Frozennode\\Administrator\\Fields\\Text',
-		'markdown' => 'Frozennode\\Administrator\\Fields\\Text',
-		'password' => 'Frozennode\\Administrator\\Fields\\Password',
-		'date' => 'Frozennode\\Administrator\\Fields\\Time',
-		'time' => 'Frozennode\\Administrator\\Fields\\Time',
-		'datetime' => 'Frozennode\\Administrator\\Fields\\Time',
-		'number' => 'Frozennode\\Administrator\\Fields\\Number',
-		'bool' => 'Frozennode\\Administrator\\Fields\\Boolean',
-		'enum' => 'Frozennode\\Administrator\\Fields\\Enum',
-		'image' => 'Frozennode\\Administrator\\Fields\\Image',
-		'file' => 'Frozennode\\Administrator\\Fields\\File',
-		'color' => 'Frozennode\\Administrator\\Fields\\Color',
+		'key' => Key::class,
+		'text' => Text::class,
+		'textarea' => Text::class,
+		'wysiwyg' => Text::class,
+		'markdown' => Text::class,
+		'password' => Password::class,
+		'date' => Time::class,
+		'time' => Time::class,
+		'datetime' => Time::class,
+		'number' => Number::class,
+		'bool' => Boolean::class,
+		'enum' => Enum::class,
+		'image' => Image::class,
+		'file' => File::class,
+		'color' => Color::class,
 
 		//relationships
-		'belongs_to' => 'Frozennode\\Administrator\\Fields\\Relationships\\BelongsTo',
-		'belongs_to_many' => 'Frozennode\\Administrator\\Fields\\Relationships\\BelongsToMany',
-		'has_one' => 'Frozennode\\Administrator\\Fields\\Relationships\\HasOne',
-		'has_many' => 'Frozennode\\Administrator\\Fields\\Relationships\\HasMany',
+		'belongs_to' => BelongsTo::class,
+		'belongs_to_many' => BelongsToMany::class,
+		'has_one' => HasOne::class,
+		'has_many' => HasMany::class,
 
 	);
 
@@ -177,7 +192,7 @@ class Factory {
 		$options = $this->validateOptions($name, $options);
 
 		//make sure the 'title' option is set
-		$options['title'] = isset($options['title']) ? $options['title'] : $options['field_name'];
+		$options['title'] = $options['title'] ?? $options['field_name'];
 
 		//ensure the type is set and then check that the field type exists
 		$this->ensureTypeIsSet($options);
@@ -201,14 +216,14 @@ class Factory {
 	 */
 	public function validateOptions($name, $options)
 	{
-		if (is_string($options))
+		if (\is_string($options))
 		{
 			$name = $options;
 			$options = array();
 		}
 
 		//if the name is not a string or the options is not an array at this point, throw an error because we can't do anything with it
-		if (!is_string($name) || !is_array($options))
+		if (!\is_string($name) || !\is_array($options))
 		{
 			throw new \InvalidArgumentException("One of the fields in your " . $this->config->getOption('name') . " configuration file is invalid");
 		}
@@ -281,7 +296,7 @@ class Factory {
 		}
 
 		//if this is a settings page and a field was supplied that is excluded
-		if ($this->config->getType() === 'settings' && in_array($options['type'], $this->settingsFieldExclusions))
+		if ($this->config->getType() === 'settings' && \in_array($options['type'], $this->settingsFieldExclusions))
 		{
 			throw new \InvalidArgumentException('The ' . $options['type'] . ' field in your ' .
 							$this->config->getOption('name') . ' settings page cannot be used on a settings page');
@@ -383,7 +398,7 @@ class Factory {
 	 */
 	public function getEditFields($loadRelationships = true, $override = false)
 	{
-		if (!sizeof($this->editFields) || $override)
+		if (!Util::count($this->editFields) || $override)
 		{
 			$this->editFields = array();
 
@@ -464,13 +479,13 @@ class Factory {
 			else
 			{
 				//if this is a collection, convert it to an array
-				if (is_a($model->$name, 'Illuminate\Database\Eloquent\Collection'))
+				if (is_a($model->$name, EloquentCollection::class))
 				{
 					$dataModel[$name] = $model->$name->toArray();
 				}
 				else
 				{
-					$dataModel[$name] = isset($options['value']) ? $options['value'] : null;
+					$dataModel[$name] = $options['value'] ?? null;
 				}
 			}
 		}
@@ -489,7 +504,7 @@ class Factory {
 		$configFilters = $this->config->getOption('filters');
 
 		//make sure that the filters array hasn't been created before and that there are supplied filters in the config
-		if (!sizeof($this->filters) && $configFilters)
+		if (!Util::count($this->filters) && $configFilters)
 		{
 			//iterate over the filters and create field objects for them
 			foreach ($configFilters as $name => $filter)
@@ -512,7 +527,7 @@ class Factory {
 	 */
 	public function getFiltersArrays()
 	{
-		if (!sizeof($this->filtersArrays))
+		if (!Util::count($this->filtersArrays))
 		{
 			foreach ($this->getFilters() as $name => $filter)
 			{
@@ -596,7 +611,7 @@ class Factory {
 		//if this is an autocomplete field, check if there is a search term. If not, just return the selected items
 		if ($fieldObject->getOption('autocomplete') && !$term)
 		{
-			if (sizeof($selectedItems))
+			if (Util::count($selectedItems))
 			{
 				$this->filterQueryBySelectedItems($query, $selectedItems, $fieldObject, $relatedKeyTable);
 
@@ -631,7 +646,7 @@ class Factory {
 	 * @param array										$selectedItems
 	 * @param string									$relatedKeyTable
 	 */
-	public function filterBySearchTerm($term, EloquentBuilder &$query, Field $fieldObject, array $selectedItems, $relatedKeyTable)
+	public function filterBySearchTerm($term, EloquentBuilder $query, Field $fieldObject, array $selectedItems, $relatedKeyTable)
 	{
 		if ($term)
 		{
@@ -644,13 +659,13 @@ class Factory {
 			});
 
 			//exclude the currently-selected items if there are any
-			if (count($selectedItems))
+			if (Util::count($selectedItems))
 			{
 				$query->whereNotIn($relatedKeyTable, $selectedItems);
 			}
 
 			//set up the limits
-			$query->take($fieldObject->getOption('num_options') + count($selectedItems));
+			$query->take($fieldObject->getOption('num_options') + Util::count($selectedItems));
 		}
 	}
 
@@ -666,7 +681,7 @@ class Factory {
 		if ($selectedItems)
 		{
 			//if this isn't an array, set it up as one
-			return is_array($selectedItems) ? $selectedItems : explode(',', $selectedItems);
+			return \is_array($selectedItems) ? $selectedItems : explode(',', $selectedItems);
 		}
 		else
 		{
@@ -684,7 +699,7 @@ class Factory {
 	 *
 	 * @return array
 	 */
-	public function filterQueryBySelectedItems(EloquentBuilder &$query, array $selectedItems, Field $fieldObject, $relatedKeyTable)
+	public function filterQueryBySelectedItems(EloquentBuilder $query, array $selectedItems, Field $fieldObject, $relatedKeyTable)
 	{
 		$query->whereIn($relatedKeyTable, $selectedItems);
 
@@ -709,17 +724,17 @@ class Factory {
 	 *
 	 * @return array
 	 */
-	public function applyConstraints($constraints, EloquentBuilder &$query, Field $fieldObject)
+	public function applyConstraints($constraints, EloquentBuilder $query, Field $fieldObject)
 	{
 		$configConstraints = $fieldObject->getOption('constraints');
 
-		if (sizeof($configConstraints))
+		if (Util::count($configConstraints))
 		{
 			//iterate over the config constraints
 			foreach ($configConstraints as $key => $relationshipName)
 			{
 				//now that we're looping through the constraints, check to see if this one was supplied
-				if (isset($constraints[$key]) && $constraints[$key] && sizeof($constraints[$key]))
+				if (isset($constraints[$key]) && $constraints[$key] && Util::count($constraints[$key]))
 				{
 					//first we get the other model and the relationship field on it
 					$model = $this->config->getDataModel();
@@ -756,7 +771,7 @@ class Factory {
 		{
 			$return[] = array(
 				'id' => $m->getKey(),
-				'text' => strval($m->{$field->getOption('name_field')}),
+				'text' => (string)$m->{$field->getOption('name_field')},
 			);
 		}
 

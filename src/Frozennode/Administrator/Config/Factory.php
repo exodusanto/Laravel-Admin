@@ -206,18 +206,18 @@ class Factory {
 		foreach ($menu as $key => $item)
 		{
 			//if the item is a string, try to find the config file
-			if (is_string($item) && $item === $name)
+			if (\is_string($item) && $item === $name)
 			{
 				$config = $this->fetchConfigFile($name);
 			}
 			//if the item is an array, recursively run this method on it
-			else if (is_array($item))
+			else if (\is_array($item))
 			{
 				$config = $this->searchMenu($name, $item);
 			}
 
 			//if the config var was set, break the loop
-			if (is_array($config))
+			if (\is_array($config))
 			{
 				break;
 			}

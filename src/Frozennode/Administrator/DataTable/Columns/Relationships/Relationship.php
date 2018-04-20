@@ -108,7 +108,7 @@ class Relationship extends Column {
 		$sql = $query->toSql();
 		$fullQuery = $this->interpolateQuery($sql, $connection->prepareBindings($query->getBindings()));
 		$split = explode(' where ', $fullQuery);
-		return isset($split[1]) ? $split[1] : '';
+		return $split[1] ?? '';
 	}
 
 	/**
@@ -161,19 +161,19 @@ class Relationship extends Column {
 
 		//build a regular expression for each parameter
 		foreach ($params as $key => $value) {
-			if (is_string($key)) {
+			if (\is_string($key)) {
 				$keys[] = "/:" . $key . "/";
 			} else {
 				$keys[] = '/[?]/';
 			}
 
-			if (is_string($value))
+			if (\is_string($value))
 				$values[$key] = "'" . $value . "'";
 
-			if (is_array($value))
+			if (\is_array($value))
 				$values[$key] = implode(',', $value);
 
-			if (is_null($value))
+			if (\is_null($value))
 				$values[$key] = 'NULL';
 		}
 

@@ -1,6 +1,8 @@
 <?php
 namespace Frozennode\Administrator\DataTable\Columns\Relationships;
 
+use Frozennode\Administrator\Util;
+
 class BelongsTo extends Relationship {
 
 	/**
@@ -17,7 +19,7 @@ class BelongsTo extends Relationship {
 	 *
 	 * @var string
 	 */
-	const BELONGS_TO = 'Illuminate\\Database\\Eloquent\\Relations\\BelongsTo';
+	const BELONGS_TO = \Illuminate\Database\Eloquent\Relations\BelongsTo::class;
 
 	/**
 	 * Builds the necessary fields on the object
@@ -30,8 +32,8 @@ class BelongsTo extends Relationship {
 		$this->tablePrefix = $this->db->getTablePrefix();
 		$nested = $this->getNestedRelationships($options['relationship']);
 
-		$relevantName = $nested['pieces'][sizeof($nested['pieces'])-1];
-		$relevantModel = $nested['models'][sizeof($nested['models'])-2];
+		$relevantName = $nested['pieces'][Util::count($nested['pieces'])-1];
+		$relevantModel = $nested['models'][Util::count($nested['models'])-2];
 		$options['nested'] = $nested;
 
 		$relationship = $relevantModel->{$relevantName}();
@@ -57,7 +59,7 @@ class BelongsTo extends Relationship {
 	{
 		$pieces = explode('.', $name);
 		$models = array();
-		$num_pieces = sizeof($pieces);
+		$num_pieces = Util::count($pieces);
 
 		//iterate over the relationships to see if they're all valid
 		foreach ($pieces as $i => $rel)
@@ -95,7 +97,7 @@ class BelongsTo extends Relationship {
 		$joins = $where = '';
 		$columnName = $this->getOption('column_name');
 		$nested = $this->getOption('nested');
-		$num_pieces = sizeof($nested['pieces']);
+		$num_pieces = Util::count($nested['pieces']);
 
 		//if there is more than one nested relationship, we need to join all the tables
 		if ($num_pieces > 1)

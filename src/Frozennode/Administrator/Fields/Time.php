@@ -35,7 +35,7 @@ class Time extends Field {
 	 *
 	 * @return void
 	 */
-	public function filterQuery(QueryBuilder &$query, &$selects = null)
+	public function filterQuery(QueryBuilder $query, &$selects = null)
 	{
 		$model = $this->config->getDataModel();
 

@@ -78,7 +78,7 @@ class Resize
 
 		$this->file = $file;
 
-		if (is_array($sizes)) {
+		if (\is_array($sizes)) {
 
 			$resized = array();
 
@@ -236,7 +236,7 @@ class Resize
 		$sfile = new SFile($file);
 
 		// If $file isn't an array, we'll turn it into one
-		if (!is_array($file)) {
+		if (!\is_array($file)) {
 			$file = array(
 				'type' => $sfile->getMimeType(),
 				'tmp_name' => $file

@@ -1,6 +1,9 @@
 <?php namespace Frozennode\Administrator\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 
 class ValidateAdmin {
 
@@ -29,13 +32,13 @@ class ValidateAdmin {
 		}
 
 		//otherwise if this is a response, return that
-		else if (is_a($response, 'Illuminate\Http\JsonResponse') || is_a($response, 'Illuminate\Http\Response'))
+		else if (is_a($response, JsonResponse::class) || is_a($response, Response::class))
 		{
 			return $response;
 		}
 
 		//if it's a redirect, send it back with the redirect uri
-		else if (is_a($response, 'Illuminate\\Http\\RedirectResponse'))
+		else if (is_a($response, RedirectResponse::class))
 		{
 			$redirectKey = config('administrator.login_redirect_key', 'redirect');
 			$redirectUri = $request->url();

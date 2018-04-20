@@ -1,6 +1,7 @@
 <?php
 namespace Frozennode\Administrator\Actions;
 
+use Frozennode\Administrator\Util;
 use Frozennode\Administrator\Validator;
 use Frozennode\Administrator\Config\ConfigInterface;
 
@@ -109,7 +110,7 @@ class Factory {
 		$model = $this->config->getDataModel();
 
 		//if the name is not a string or the options is not an array at this point, throw an error because we can't do anything with it
-		if (!is_string($name) || !is_array($options))
+		if (!\is_string($name) || !\is_array($options))
 		{
 			throw new \InvalidArgumentException("A custom action in your  " . $this->config->getOption('action_name') . " configuration file is invalid");
 		}
@@ -119,11 +120,11 @@ class Factory {
 
 		//set the permission
 		$permission = $this->validator->arrayGet($options, 'permission', false);
-		$options['has_permission'] = is_callable($permission) ? $permission($model) : true;
+		$options['has_permission'] = \is_callable($permission) ? $permission($model) : true;
 
 		//check if the messages array exists
 		$options['messages'] = $this->validator->arrayGet($options, 'messages', array());
-		$options['messages'] = is_array($options['messages']) ? $options['messages'] : array();
+		$options['messages'] = \is_array($options['messages']) ? $options['messages'] : array();
 
 		return $options;
 	}
@@ -174,7 +175,7 @@ class Factory {
 	public function getActions($override = false)
 	{
 		//make sure we only run this once and then return the cached version
-		if (!sizeof($this->actions) || $override)
+		if (!Util::count($this->actions) || $override)
 		{
 			$this->actions = array();
 
@@ -198,7 +199,7 @@ class Factory {
 	public function getActionsOptions($override = false)
 	{
 		//make sure we only run this once and then return the cached version
-		if (!sizeof($this->actionsOptions) || $override)
+		if (!Util::count($this->actionsOptions) || $override)
 		{
 			$this->actionsOptions = array();
 
@@ -222,7 +223,7 @@ class Factory {
 	public function getGlobalActions($override = false)
 	{
 		//make sure we only run this once and then return the cached version
-		if (!sizeof($this->globalActions) || $override)
+		if (!Util::count($this->globalActions) || $override)
 		{
 			$this->globalActions = array();
 
@@ -246,7 +247,7 @@ class Factory {
 	public function getGlobalActionsOptions($override = false)
 	{
 		//make sure we only run this once and then return the cached version
-		if (!sizeof($this->globalActionsOptions) || $override)
+		if (!Util::count($this->globalActionsOptions) || $override)
 		{
 			$this->globalActionsOptions = array();
 
@@ -270,7 +271,7 @@ class Factory {
 	public function getActionPermissions($override = false)
 	{
 		//make sure we only run this once and then return the cached version
-		if (!sizeof($this->actionPermissions) || $override)
+		if (!Util::count($this->actionPermissions) || $override)
 		{
 			$this->actionPermissions = array();
 			$model = $this->config->getDataModel();
@@ -283,7 +284,7 @@ class Factory {
 			//loop over the actions to build the list
 			foreach ($permissions as $action => $callback)
 			{
-				if (is_callable($callback))
+				if (\is_callable($callback))
 				{
 					$this->actionPermissions[$action] = (bool) $callback($model);
 				}

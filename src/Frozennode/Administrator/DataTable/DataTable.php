@@ -198,7 +198,7 @@ class DataTable {
 
 		//then perform the count query
 		$results = $countQuery->getConnection()->select($sql, $queryBindings);
-		$numRows = is_array($results[0]) ? $results[0]['aggregate'] : $results[0]->aggregate;
+		$numRows = \is_array($results[0]) ? $results[0]['aggregate'] : $results[0]->aggregate;
 		$page = (int) $page;
 		$last = (int) ceil($numRows / $this->rowsPerPage);
 
@@ -218,10 +218,10 @@ class DataTable {
 	 * @param \Illuminate\Database\Query\Builder	$countQuery
 	 * @param array									$selects
 	 */
-	public function setFilters($filters, QueryBuilder &$query, QueryBuilder &$countQuery, &$selects)
+	public function setFilters($filters, QueryBuilder $query, QueryBuilder $countQuery, &$selects)
 	{
 		//then we set the filters
-		if ($filters && is_array($filters))
+		if ($filters && \is_array($filters))
 		{
 			foreach ($filters as $filter)
 			{
@@ -334,16 +334,16 @@ class DataTable {
 	 */
 	public function setSort($sort = null)
 	{
-		$sort = $sort && is_array($sort) ? $sort : $this->config->getOption('sort');
+		$sort = $sort && \is_array($sort) ? $sort : $this->config->getOption('sort');
 
 		//set the sort values
 		$this->sort = array(
-			'field' => isset($sort['field']) ? $sort['field'] : $this->config->getDataModel()->getKeyName(),
-			'direction' => isset($sort['direction']) ? $sort['direction'] : 'desc',
+			'field' => $sort['field'] ?? $this->config->getDataModel()->getKeyName(),
+			'direction' => $sort['direction'] ?? 'desc',
 		);
 
 		//if the sort direction isn't valid, set it to 'desc'
-		if (!in_array($this->sort['direction'], array('asc', 'desc')))
+		if (!\in_array($this->sort['direction'], array('asc', 'desc')))
 		{
 			$this->sort['direction'] = 'desc';
 		}

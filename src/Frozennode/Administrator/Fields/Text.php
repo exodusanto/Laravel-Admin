@@ -33,7 +33,7 @@ class Text extends Field {
 	 *
 	 * @return void
 	 */
-	public function filterQuery(QueryBuilder &$query, &$selects = null)
+	public function filterQuery(QueryBuilder $query, &$selects = null)
 	{
 		//run the parent method
 		parent::filterQuery($query, $selects);

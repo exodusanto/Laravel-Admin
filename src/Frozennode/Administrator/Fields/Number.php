@@ -56,7 +56,7 @@ class Number extends Field {
 	 */
 	public function fillModel(&$model, $input)
 	{
-		$model->{$this->getOption('field_name')} = is_null($input) || $input === '' ? null : $this->parseNumber($input);
+		$model->{$this->getOption('field_name')} = \is_null($input) || $input === '' ? null : $this->parseNumber($input);
 	}
 
 	/**

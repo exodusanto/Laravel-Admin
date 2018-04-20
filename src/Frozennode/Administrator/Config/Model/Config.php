@@ -338,7 +338,7 @@ class Config extends ConfigBase implements ConfigInterface {
 		$validation = $this->validateData($validation_data, $rules, $messages);
 
 		//if a string was kicked back, it's an error, so return it
-		if (is_string($validation)) return $validation;
+		if (\is_string($validation)) return $validation;
 
 		//save the model
 		$model->save();
@@ -399,7 +399,7 @@ class Config extends ConfigBase implements ConfigInterface {
 		$optionsRules = $this->getOption('rules');
 
 		//if the 'rules' option was provided for this model, it takes precedent
-		if (is_array($optionsRules))
+		if (\is_array($optionsRules))
 		{
 			return $optionsRules;
 		}
@@ -418,7 +418,7 @@ class Config extends ConfigBase implements ConfigInterface {
 		$optionsMessages = $this->getOption('messages');
 
 		//if the 'rules' option was provided for this model, it takes precedent
-		if (is_array($optionsMessages))
+		if (\is_array($optionsMessages))
 		{
 			return $optionsMessages;
 		}
@@ -436,7 +436,7 @@ class Config extends ConfigBase implements ConfigInterface {
 	{
 		$model = $this->getDataModel();
 
-		return isset($model::$rules) && is_array($model::$rules) ? $model::$rules : false;
+		return isset($model::$rules) && \is_array($model::$rules) ? $model::$rules : false;
 	}
 
 	/**
@@ -448,7 +448,7 @@ class Config extends ConfigBase implements ConfigInterface {
 	{
 		$model = $this->getDataModel();
 
-		return isset($model::$messages) && is_array($model::$messages) ? $model::$messages : false;
+		return isset($model::$messages) && \is_array($model::$messages) ? $model::$messages : false;
 	}
 
 	/**
@@ -523,7 +523,7 @@ class Config extends ConfigBase implements ConfigInterface {
 	{
 		$linkCallback = $this->getOption('link');
 
-		if ($linkCallback && is_callable($linkCallback))
+		if ($linkCallback && \is_callable($linkCallback))
 		{
 			return $linkCallback($this->getDataModel());
 		}
@@ -540,7 +540,7 @@ class Config extends ConfigBase implements ConfigInterface {
 	 *
 	 * @return void
 	 */
-	public function runQueryFilter(\Illuminate\Database\Query\Builder &$query)
+	public function runQueryFilter(\Illuminate\Database\Query\Builder $query)
 	{
 		if ($filter = $this->getOption('query_filter'))
 		{

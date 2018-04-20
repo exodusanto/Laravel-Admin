@@ -1,6 +1,7 @@
 <?php
 namespace Frozennode\Administrator\Fields\Relationships;
 
+use Frozennode\Administrator\Util;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 
@@ -83,7 +84,7 @@ class BelongsToMany extends Relationship {
 	 *
 	 * @return void
 	 */
-	public function filterQuery(QueryBuilder &$query, &$selects = null)
+	public function filterQuery(QueryBuilder $query, &$selects = null)
 	{
 		//run the parent method
 		parent::filterQuery($query, $selects);
@@ -112,10 +113,10 @@ class BelongsToMany extends Relationship {
 		$query->whereIn($column2, $value);
 
 		//add having clauses
-		$query->havingRaw('COUNT(DISTINCT ' . $query->getConnection()->getTablePrefix() . $column2 . ') = ' . count($value));
+		$query->havingRaw('COUNT(DISTINCT ' . $query->getConnection()->getTablePrefix() . $column2 . ') = ' . Util::count($value));
 
 		//add select field
-		if ($selects && !in_array($column2, $selects))
+		if ($selects && !\in_array($column2, $selects))
 		{
 			$selects[] = $column2;
 		}
@@ -130,7 +131,7 @@ class BelongsToMany extends Relationship {
 	 *
 	 * @return void
 	 */
-	public function constrainQuery(EloquentBuilder &$query, $relatedModel, $constraint)
+	public function constrainQuery(EloquentBuilder $query, $relatedModel, $constraint)
 	{
 		//if the column hasn't been joined yet, join it
 		if (!$this->validator->isJoined($query, $this->getOption('table')))

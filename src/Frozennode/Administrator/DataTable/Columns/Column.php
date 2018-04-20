@@ -177,7 +177,7 @@ class Column {
 		//run the visible property closure if supplied
 		$visible = $this->validator->arrayGet($options, 'visible');
 
-		if (is_callable($visible))
+		if (\is_callable($visible))
 		{
 			$options['visible'] = $visible($this->config->getDataModel()) ? true : false;
 		}
@@ -250,7 +250,7 @@ class Column {
 	{
 		$output = $this->getOption('output');
 		
-		if (is_callable($output)) {
+		if (\is_callable($output)) {
 			return $output($value, $item);
 		}
 		
