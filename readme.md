@@ -88,6 +88,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 ## Recent Changelog
 
 ### 5.6.5
+- Added: Allow custom routes name (#23)
+
+### 5.6.5
 - Support: PHP 7.2 (#22)
 
 ### 5.6.3
@@ -117,15 +120,3 @@ Administrator is released under the MIT License. See the LICENSE file for detail
     - **Test** resize: prevent stretch of image
     - **Incremental** naming: name*_n* if already exist
 - Bugfix: wysiwyg loading on settings
-
-### 5.0.11
-- Bugfix: Had to make the middleware additon backwards compatable
-- Docs: Added doc updates
-
-### 5.0.10
-- Bugfix: L5.2 changed the way url() works so added url('/') instead
-- Added: Support for middleware additions to the Admin routes via the administrator config
-- Testfix: Fixed failing tests
-
-### 5.0.9
-- Bugfix: Fix for datetimepicker partially being covered by top menu
