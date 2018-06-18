@@ -65,6 +65,13 @@ class Factory {
 	protected $pagePrefix = 'page.';
 
 	/**
+	 * The custom route menu prefix
+	 *
+	 * @var string
+	 */
+	protected $routePrefix = 'route.';
+
+	/**
 	 * The rules array
 	 *
 	 * @var array
@@ -124,7 +131,7 @@ class Factory {
 		$options = $this->searchMenu($name);
 
 		//return the config object if the file/array was found, or false if it wasn't
-		$config = $options ? $this->getItemConfigObject($options) : ($this->type === 'page' ? true : false);
+		$config = $options ? $this->getItemConfigObject($options) : (($this->type === 'page' || $this->type === 'route') ? true : false);
 
 		//set the primary config
 		$this->config = $primary ? $config : $this->config;
@@ -175,6 +182,11 @@ class Factory {
 		elseif (strpos($name, $this->pagePrefix) === 0)
 		{
 			return $this->type = 'page';
+		}
+		//otherwise if the name is prefixed with the page prefix
+		elseif (strpos($name, $this->routePrefix) === 0)
+		{
+			return $this->type = 'route';
 		}
 		//otherwise it's a model
 		else
@@ -241,6 +253,14 @@ class Factory {
 	{
 		return $this->pagePrefix;
 	}
+
+    /**
+     * Gets the prefix for the currently-searched item
+     */
+    public function getRoutePrefix()
+    {
+        return $this->routePrefix;
+    }
 
 	/**
 	 * Gets the prefix for the currently-searched item
