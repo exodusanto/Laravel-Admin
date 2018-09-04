@@ -18,28 +18,16 @@ New Version
 
 ## Composer
 
+To install Administrator as a Composer package to be used with Laravel 5.7, simply run:
+
+```sh
+composer require "exodusanto/administrator: 5.7.*"
+```
+
 To install Administrator as a Composer package to be used with Laravel 5.6, simply run:
 
 ```sh
 composer require "exodusanto/administrator: 5.6.*"
-```
-
-To install Administrator as a Composer package to be used with Laravel 5.5, simply run:
-
-```sh
-composer require "exodusanto/administrator: 5.5.*"
-```
-
-To install Administrator as a Composer package to be used with Laravel 5.4, simply run:
-
-```sh
-composer require "exodusanto/administrator: 5.4.*"
-```
-
-To install Administrator as a Composer package to be used with Laravel 5, simply run:
-
-```sh
-composer require "exodusanto/administrator: 5.*"
 ```
 
 Once it's installed, you can register the service provider in `config/app.php` in the `providers` array:
@@ -86,6 +74,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 
 ## Recent Changelog
+
+### 5.7.0
+- Support: Laravel 5.7
 
 ### 5.6.5
 - Added: Allow custom routes name (#23)
