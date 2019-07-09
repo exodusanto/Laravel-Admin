@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - 7.1
+  - 7.2
 
 branches:
   except:
@@ -11,7 +11,7 @@ branches:
     - laravel-fix-54
 
 before_script:
-  - curl -s -o phpunit.phar  https://phar.phpunit.de/phpunit-5.7.12.phar
+  - curl -s -o phpunit.phar  https://phar.phpunit.de/phpunit-7.5.phar
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install
 
