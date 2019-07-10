@@ -1,5 +1,14 @@
 ## Changelog
 
+### 5.8.0
+- Support: Laravel 5.8
+
+### 5.7.0
+- Support: Laravel 5.7
+
+### 5.6.5
+- Added: Allow custom routes name (#23)
+
 ### 5.6.5
 - Support: PHP 7.2 (#22)
 

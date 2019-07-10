@@ -18,16 +18,16 @@ New Version
 
 ## Composer
 
+To install Administrator as a Composer package to be used with Laravel 5.8, simply run:
+
+```sh
+composer require "exodusanto/administrator: 5.8.*"
+```
+
 To install Administrator as a Composer package to be used with Laravel 5.7, simply run:
 
 ```sh
 composer require "exodusanto/administrator: 5.7.*"
-```
-
-To install Administrator as a Composer package to be used with Laravel 5.6, simply run:
-
-```sh
-composer require "exodusanto/administrator: 5.6.*"
 ```
 
 Once it's installed, you can register the service provider in `config/app.php` in the `providers` array:
@@ -75,6 +75,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ## Recent Changelog
 
+### 5.8.0
+- Support: Laravel 5.8
+
 ### 5.7.0
 - Support: Laravel 5.7
 
@@ -99,15 +102,3 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 ### 5.5.0
 - Added: L5.5 support
 - Added: Laravel Package Auto-Discovery
-
-### 5.4.0
-- Added: New layout
-- Added: Laravel 5.4 compatibility
-- Added: Title config String or Closure
-- Added: Favicon (png only) config String or Closure
-- Added: ENUM config Array or Closure
-- Added: New ckeditor layout
-- Added: Images config:
-    - **Test** resize: prevent stretch of image
-    - **Incremental** naming: name*_n* if already exist
-- Bugfix: wysiwyg loading on settings
