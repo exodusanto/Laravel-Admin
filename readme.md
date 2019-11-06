@@ -75,6 +75,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ## Recent Changelog
 
+### 5.8.1
+- Fix: Relationships BelongsTo (#30)
+
 ### 5.8.0
 - Support: Laravel 5.8
 
@@ -98,7 +101,3 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ### 5.5.1
 - Bugfix: Fix relation BelongsToMany methods 
-
-### 5.5.0
-- Added: L5.5 support
-- Added: Laravel Package Auto-Discovery

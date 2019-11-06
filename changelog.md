@@ -1,5 +1,8 @@
 ## Changelog
 
+### 5.8.1
+- Fix: Relationships BelongsTo (#30)
+
 ### 5.8.0
 - Support: Laravel 5.8
 
