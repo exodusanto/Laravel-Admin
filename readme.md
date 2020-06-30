@@ -75,6 +75,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ## Recent Changelog
 
+### 6.0.0
+- Support: Laravel 6.0
+
 ### 5.8.1
 - Fix: Relationships BelongsTo (#30)
 
@@ -98,6 +101,3 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ### 5.5.3
 - Added: Image field upload to Storage (ex. S3)
-
-### 5.5.1
-- Bugfix: Fix relation BelongsToMany methods 

@@ -1,5 +1,8 @@
 ## Changelog
 
+### 6.0.0
+- Support: Laravel 6.0
+
 ### 5.8.1
 - Fix: Relationships BelongsTo (#30)
 
