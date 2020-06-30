@@ -1,5 +1,8 @@
 ## Changelog
 
+### 7.0.0
+- Support: Laravel 7.0
+
 ### 6.0.0
 - Support: Laravel 6.0
 
