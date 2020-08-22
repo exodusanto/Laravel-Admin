@@ -653,7 +653,17 @@ class AdminController extends Controller {
 			$fieldFactory = app('admin_field_factory');
 		} catch (\ReflectionException $e) {
 			return null;
+        } catch(\Exception $e) {
+		    /* TODO: this doesn't fix the issue, just keeps things that are using it from failing here
+                Once the issue is fixed, these debug logs should be removed.
+		    */
+            \Illuminate\Support\Facades\Log::debug("app('itemconfig') failed. ");
+            \Illuminate\Support\Facades\Log::debug("exception type is: " . get_class($e));
+            \Illuminate\Support\Facades\Log::debug("exception is: " . $e->getMessage());
+            \Illuminate\Support\Facades\Log::debug($e->getTraceAsString());
+            return null;
 		}
+
 		if (array_key_exists('form_request', $config->getOptions())) {
 			try {
 				$model = $config->getFilledDataModel($request, $fieldFactory->getEditFields(), $request->id);
