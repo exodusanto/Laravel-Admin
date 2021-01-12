@@ -1,5 +1,5 @@
 {
-	"name": "exodusanto/administrator",
+	"name": "jkachel/laravel-admin",
 	"description": "A database interface package for Laravel (Legacy of Frozennode Laravel-Administrator)",
 	"homepage": "http://administrator.frozennode.com",
 	"keywords": ["administrator", "admin", "database", "laravel-administrator", "laravel", "cms"],
