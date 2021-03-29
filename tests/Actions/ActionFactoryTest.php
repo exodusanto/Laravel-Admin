@@ -3,7 +3,7 @@ namespace Frozennode\Administrator\Tests\DataTable\Columns;
 
 use Mockery as m;
 
-class ActionFactoryTest extends \PHPUnit_Framework_TestCase {
+class ActionFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * The Validator mock
@@ -29,7 +29,7 @@ class ActionFactoryTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Set up function
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->validator = m::mock('Frozennode\Administrator\Validator');
 		$this->config = m::mock('Frozennode\Administrator\Config\Model\Config');
@@ -39,7 +39,7 @@ class ActionFactoryTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Tear down function
 	 */
-	public function tearDown()
+	public function tearDown(): void
 	{
 		m::close();
 	}

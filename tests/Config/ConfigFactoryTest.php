@@ -4,7 +4,7 @@ namespace Frozennode\Administrator\Tests\Config;
 use Mockery as m;
 use Frozennode\Administrator\Config\Factory;
 
-class ConfigFactoryTest extends \PHPUnit_Framework_TestCase {
+class ConfigFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * The Validator mock
@@ -25,7 +25,7 @@ class ConfigFactoryTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Set up function
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->validator = m::mock('Frozennode\Administrator\Validator');
 		$this->validator->shouldReceive('override')->once()
@@ -35,7 +35,7 @@ class ConfigFactoryTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Tear down function
 	 */
-	public function tearDown()
+	public function tearDown(): void
 	{
 		m::close();
 	}

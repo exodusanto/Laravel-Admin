@@ -3,7 +3,7 @@ namespace Frozennode\Administrator\Tests;
 
 use Mockery as m;
 
-class MenuTest extends \PHPUnit_Framework_TestCase {
+class MenuTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * The Config Repository mock
@@ -29,7 +29,7 @@ class MenuTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Set up function
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->config = m::mock('Illuminate\Config\Repository');
 		$this->configFactory = m::mock('Frozennode\Administrator\Config\Factory');
@@ -39,7 +39,7 @@ class MenuTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Tear down function
 	 */
-	public function tearDown()
+	public function tearDown(): void
 	{
 		m::close();
 	}

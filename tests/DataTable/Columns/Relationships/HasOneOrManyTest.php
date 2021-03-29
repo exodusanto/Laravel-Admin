@@ -3,7 +3,7 @@ namespace Frozennode\Administrator\Tests\DataTable\Columns\Relationships;
 
 use Mockery as m;
 
-class HasOneOrManyTest extends \PHPUnit_Framework_TestCase {
+class HasOneOrManyTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * The Validator mock
@@ -36,7 +36,7 @@ class HasOneOrManyTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Set up function
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->validator = m::mock('Frozennode\Administrator\Validator');
 		$this->config = m::mock('Frozennode\Administrator\Config\Model\Config');
@@ -50,7 +50,7 @@ class HasOneOrManyTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Tear down function
 	 */
-	public function tearDown()
+	public function tearDown(): void
 	{
 		m::close();
 	}

@@ -3,7 +3,7 @@ namespace Frozennode\Administrator\Tests\Config\Settings;
 
 use Mockery as m;
 
-class SettingsConfigTest extends \PHPUnit_Framework_TestCase {
+class SettingsConfigTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * The Validator mock
@@ -22,7 +22,7 @@ class SettingsConfigTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Set up function
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->validator = m::mock('Frozennode\Administrator\Validator');
 		$this->config = m::mock('Frozennode\Administrator\Config\Settings\Config', array($this->validator, $this->validator, array()))->makePartial();
@@ -31,7 +31,7 @@ class SettingsConfigTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Tear down function
 	 */
-	public function tearDown()
+	public function tearDown(): void
 	{
 		m::close();
 	}

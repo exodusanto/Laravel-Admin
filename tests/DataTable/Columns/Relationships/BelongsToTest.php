@@ -33,7 +33,7 @@ class BelongsToDeepNestStub
     }
 }
 
-class BelongsToTest extends \PHPUnit_Framework_TestCase
+class BelongsToTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -67,7 +67,7 @@ class BelongsToTest extends \PHPUnit_Framework_TestCase
     /**
      * Set up function
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->validator = m::mock('Frozennode\Administrator\Validator');
         $this->config = m::mock('Frozennode\Administrator\Config\Model\Config');
@@ -83,7 +83,7 @@ class BelongsToTest extends \PHPUnit_Framework_TestCase
     /**
      * Tear down function
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
