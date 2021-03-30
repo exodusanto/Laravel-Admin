@@ -21,133 +21,70 @@ if (is_array(config('administrator.middleware'))) {
  */
 Route::group(array('domain' => config('administrator.domain'), 'prefix' => config('administrator.uri'), 'middleware' => $middleware_array), function () {
     //Admin Dashboard
-    Route::get('/', array(
-        'as' => 'admin_dashboard',
-        'uses' => [AdminController::class, 'dashboard',]
-    ));
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin_dashboard');
 
     //File Downloads
-    Route::get('file_download', array(
-        'as' => 'admin_file_download',
-        'uses' => [AdminController::class, 'fileDownload']
-    ));
+    Route::get('file_download', [AdminController::class, 'fileDownload'])->name('admin_file_download');
 
     //Custom Pages
-    Route::get('page/{page}', array(
-        'as' => 'admin_page',
-        'uses' => [AdminController::class, 'page']
-    ));
+    Route::get('page/{page}', [AdminController::class, 'page'])->name('admin_page');
 
     Route::group(array('middleware' => [ValidateSettings::class, PostValidate::class]), function () {
         //Settings Pages
-        Route::get('settings/{settings}', array(
-            'as' => 'admin_settings',
-            'uses' => [AdminController::class, 'settings']
-        ));
+        Route::get('settings/{settings}', [AdminController::class, 'settings'])->name('admin_settings');
 
         //Display a settings file
-        Route::get('settings/{settings}/file', array(
-            'as' => 'admin_settings_display_file',
-            'uses' => [AdminController::class, 'displayFile']
-        ));
+        Route::get('settings/{settings}/file', [AdminController::class, 'displayFile'])->name('admin_settings_display_file');
 
         //Save Item
-        Route::post('settings/{settings}/save', array(
-            'as' => 'admin_settings_save',
-            'uses' => [AdminController::class, 'settingsSave']
-        ));
+        Route::post('settings/{settings}/save', [AdminController::class, 'settingsSave'])->name('admin_settings_save');
 
         //Custom Action
-        Route::post('settings/{settings}/custom_action', array(
-            'as' => 'admin_settings_custom_action',
-            'uses' => [AdminController::class, 'settingsCustomAction']
-        ));
+        Route::post('settings/{settings}/custom_action', [AdminController::class, 'settingsCustomAction'])->name('admin_settings_custom_action');
 
         //Settings file upload
-        Route::post('settings/{settings}/{field}/file_upload', array(
-            'as' => 'admin_settings_file_upload',
-            'uses' => [AdminController::class, 'fileUpload']
-        ));
+        Route::post('settings/{settings}/{field}/file_upload', [AdminController::class, 'fileUpload'])->name('admin_settings_file_upload');
     });
 
     //Switch locales
-    Route::get('switch_locale/{locale}', array(
-        'as' => 'admin_switch_locale',
-        'uses' => [AdminController::class, 'switchLocale']
-    ));
+    Route::get('switch_locale/{locale}', [AdminController::class, 'switchLocale'])->name('admin_switch_locale');
 
     //The route group for all other requests needs to validate admin, model, and add assets
     Route::group(array('middleware' => [ValidateModel::class, PostValidate::class]), function () {
         //Model Index
-        Route::get('{model}', array(
-            'as' => 'admin_index',
-            'uses' => [AdminController::class, 'index']
-        ));
+        Route::get('{model}', [AdminController::class, 'index'])->name('admin_index');
 
         //New Item
-        Route::get('{model}/new', array(
-            'as' => 'admin_new_item',
-            'uses' => [AdminController::class, 'item']
-        ));
+        Route::get('{model}/new', [AdminController::class, 'item'])->name('admin_new_item');
 
         //Update a relationship's items with constraints
-        Route::post('{model}/update_options', array(
-            'as' => 'admin_update_options',
-            'uses' => [AdminController::class, 'updateOptions']
-        ));
+        Route::post('{model}/update_options', [AdminController::class, 'updateOptions'])->name('admin_update_options');
 
         //Display an image or file field's image or file
-        Route::get('{model}/file', array(
-            'as' => 'admin_display_file',
-            'uses' => [AdminController::class, 'displayFile']
-        ));
+        Route::get('{model}/file', [AdminController::class, 'displayFile'])->name('admin_display_file');
 
         //Updating Rows Per Page
-        Route::post('{model}/rows_per_page', array(
-            'as' => 'admin_rows_per_page',
-            'uses' => [AdminController::class, 'rowsPerPage']
-        ));
+        Route::post('{model}/rows_per_page', [AdminController::class, 'rowsPerPage'])->name('admin_rows_per_page');
 
         //Get results
-        Route::post('{model}/results', array(
-            'as' => 'admin_get_results',
-            'uses' => [AdminController::class, 'results']
-        ));
+        Route::post('{model}/results', [AdminController::class, 'results'])->name('admin_get_results');
 
         //Custom Model Action
-        Route::post('{model}/custom_action', array(
-            'as' => 'admin_custom_model_action',
-            'uses' => [AdminController::class, 'customModelAction']
-        ));
+        Route::post('{model}/custom_action', [AdminController::class, 'customModelAction'])->name('admin_custom_model_action');
 
         //Get Item
-        Route::get('{model}/{id}', array(
-            'as' => 'admin_get_item',
-            'uses' => [AdminController::class, 'item']
-        ));
+        Route::get('{model}/{id}', [AdminController::class, 'item'])->name('admin_get_item');
 
         //File Uploads
-        Route::post('{model}/{field}/file_upload', array(
-            'as' => 'admin_file_upload',
-            'uses' => [AdminController::class, 'fileUpload']
-        ));
+        Route::post('{model}/{field}/file_upload', [AdminController::class, 'fileUpload'])->name('admin_file_upload');
 
         //Save Item
-        Route::post('{model}/{id?}/save', array(
-            'as' => 'admin_save_item',
-            'uses' => [AdminController::class, 'save']
-        ));
+        Route::post('{model}/{id?}/save', [AdminController::class, 'save'])->name('admin_save_item');
 
         //Delete Item
-        Route::post('{model}/{id}/delete', array(
-            'as' => 'admin_delete_item',
-            'uses' => [AdminController::class, 'delete']
-        ));
+        Route::post('{model}/{id}/delete', [AdminController::class, 'delete'])->name('admin_delete_item');
 
         //Custom Item Action
-        Route::post('{model}/{id}/custom_action', array(
-            'as' => 'admin_custom_model_item_action',
-            'uses' => [AdminController::class, 'customModelItemAction']
-        ));
+        Route::post('{model}/{id}/custom_action', [AdminController::class, 'customModelItemAction'])->name('admin_custom_model_item_action');
     });
 });

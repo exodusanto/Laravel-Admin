@@ -2,6 +2,7 @@
 namespace Frozennode\Administrator\Tests\DataTable\Columns\Relationships;
 
 use Mockery as m;
+use InvalidArgumentException;
 
 class BelongsToStub
 {
@@ -133,11 +134,10 @@ class BelongsToTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(sizeof($nested['models']), 4);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testGetNestedRelationshipsFails()
     {
+        $this->expectException(InvalidArgumentException::class);
+        
         $name = 'nope';
         $stub = new BelongsToStub;
         $this->config->shouldReceive('getDataModel')->once()->andReturn($stub)
