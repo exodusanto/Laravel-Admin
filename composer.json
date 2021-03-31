@@ -48,5 +48,6 @@
 			"if [ -d \"vendor/ckeditor/\" ] \nthen \nrm -R vendor/ckeditor/ \nfi"
 		]
 	},
+	"prefer-stable": true,
 	"minimum-stability": "dev"
 }
