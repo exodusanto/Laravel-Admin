@@ -5,7 +5,7 @@ use Mockery as m;
 
 class EloquentStub extends \Illuminate\Database\Eloquent\Model {}
 
-class ValidatorTest extends \PHPUnit_Framework_TestCase {
+class ValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * The UrlGenerator mock
@@ -24,7 +24,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Set up function
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->url = m::mock('Illuminate\Routing\UrlGenerator');
 		$this->validator = m::mock('Frozennode\Administrator\Validator')->makePartial();
@@ -33,7 +33,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Tear down function
 	 */
-	public function tearDown()
+	public function tearDown(): void
 	{
 		m::close();
 	}

@@ -3,7 +3,7 @@ namespace Frozennode\Administrator\Tests\DataTable\Columns;
 
 use Mockery as m;
 
-class DataTableTest extends \PHPUnit_Framework_TestCase {
+class DataTableTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * The Config mock
@@ -36,7 +36,7 @@ class DataTableTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Set up function
 	 */
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->config = m::mock('Frozennode\Administrator\Config\Model\Config');
 		$this->columnFactory = m::mock('Frozennode\Administrator\DataTable\Columns\Factory');
@@ -48,7 +48,7 @@ class DataTableTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Tear down function
 	 */
-	public function tearDown()
+	public function tearDown(): void
 	{
 		m::close();
 	}
