@@ -4,6 +4,7 @@
 	"homepage": "http://administrator.frozennode.com",
 	"keywords": ["administrator", "admin", "database", "laravel-administrator", "laravel", "cms"],
 	"license": "MIT",
+	"version": "8.0.0",
 	"authors": [
 		{
 			"name": "Jan Hartigan",
