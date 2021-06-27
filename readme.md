@@ -15,6 +15,9 @@ New Version
 [![Build Status](https://travis-ci.org/exodusanto/Laravel-Admin.svg?branch=master)](https://travis-ci.org/exodusanto/Laravel-Admin)
 
 <img src="https://raw.github.com/FrozenNode/Laravel-Administrator/master/examples/images/overview.jpg" />
+<a href="https://gitmoji.dev">
+  <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square" alt="Gitmoji">
+</a>
 
 ## Composer
 
