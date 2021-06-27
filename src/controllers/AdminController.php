@@ -87,7 +87,7 @@ class AdminController extends Controller
         //if it's ajax, we just return the item information as json
         if ($this->request->ajax()) {
             //try to get the object
-            $model = $config->getModel($itemId, $fields, $columnFactory->getIncludedColumns($fields));
+            $model = $config->getModel($fields, $columnFactory->getIncludedColumns($fields), $itemId);
 
             if ($model->exists) {
                 $model = $config->updateModel($model, $fieldFactory, $actionFactory, $itemId);
@@ -147,7 +147,7 @@ class AdminController extends Controller
             //grab the latest model data
             $columnFactory = app('admin_column_factory');
             $fields = $fieldFactory->getEditFields();
-            $model = $config->getModel($id, $fields, $columnFactory->getIncludedColumns($fields));
+            $model = $config->getModel($fields, $columnFactory->getIncludedColumns($fields), $id);
 
             if ($model->exists) {
                 $model = $config->updateModel($model, $fieldFactory, $actionFactory, $id);
@@ -286,7 +286,7 @@ class AdminController extends Controller
             $fieldFactory = app('admin_field_factory');
             $columnFactory = app('admin_column_factory');
             $fields = $fieldFactory->getEditFields();
-            $model = $config->getModel($id, $fields, $columnFactory->getIncludedColumns($fields));
+            $model = $config->getModel($fields, $columnFactory->getIncludedColumns($fields), $id);
 
             if ($model->exists) {
                 $model = $config->updateModel($model, $fieldFactory, $actionFactory, $id);
