@@ -60,7 +60,7 @@ class ModelConfigTest extends \PHPUnit\Framework\TestCase {
 		$columns = array('foo' => 'bar', 'field1' => 'bar');
 		$this->config->shouldReceive('getDataModel')->once()->andReturn($model)
 					->shouldReceive('setExtraModelValues')->once();
-		$this->assertEquals($this->config->getModel(5, $fields, $columns), $model);
+		$this->assertEquals($this->config->getModel($fields, $columns, 5), $model);
 	}
 
 	public function testSetExtraModelValues()
