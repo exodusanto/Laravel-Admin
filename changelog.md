@@ -1,5 +1,8 @@
 ## Changelog
 
+### 8.1.0
+- Support: PHP 8.0
+
 ### 8.0.0
 - Support: Laravel 8.0
 
