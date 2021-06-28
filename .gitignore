@@ -9,3 +9,4 @@ composer.lock
 /nbproject/private/
 nbproject
 .phpunit.result.cache
+.idea/
