@@ -1,5 +1,8 @@
 ## Changelog
 
+### 8.1.1
+- Fix: Removed Input facade (#41)
+
 ### 8.1.0
 - Support: PHP 8.0
 

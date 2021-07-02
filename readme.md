@@ -79,6 +79,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ## Recent Changelog
 
+### 8.1.1
+- Fix: Removed Input facade (#41)
+
 ### 8.1.0
 - Support: PHP 8.0
 
@@ -102,6 +105,3 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ### 5.6.5
 - Added: Allow custom routes name (#23)
-
-### 5.6.5
-- Support: PHP 7.2 (#22)
