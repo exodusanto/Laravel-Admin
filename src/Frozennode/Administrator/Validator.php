@@ -150,6 +150,11 @@ class Validator extends \Illuminate\Validation\Validator
      */
     public function validateDirectory($attribute, $value, $parameters)
     {
+        if ($value === null)
+        {
+            return false;
+        }
+
         return is_dir($value);
     }
 
@@ -214,6 +219,11 @@ class Validator extends \Illuminate\Validation\Validator
      */
     public function validateEloquent($attribute, $value, $parameters)
     {
+        if ($value === null)
+        {
+            return false;
+        }
+
         return class_exists($value) && is_a(new $value, Model::class);
     }
 }
