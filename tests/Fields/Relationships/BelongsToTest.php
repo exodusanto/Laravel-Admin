@@ -3,6 +3,7 @@ namespace Frozennode\Administrator\Tests\Fields\Relationships;
 
 use Mockery as m;
 
+#[\AllowDynamicProperties]
 class BelongsToEloquentStub
 {
     public $rel;
