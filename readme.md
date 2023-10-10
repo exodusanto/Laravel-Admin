@@ -79,6 +79,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ## Recent Changelog
 
+### 8.1.2
+- Bump: Bump mockery/mockery (#49)
+
 ### 8.1.1
 - Fix: Removed Input facade (#41)
 
@@ -102,6 +105,3 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ### 5.7.0
 - Support: Laravel 5.7
-
-### 5.6.5
-- Added: Allow custom routes name (#23)

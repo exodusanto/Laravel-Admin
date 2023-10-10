@@ -1,5 +1,8 @@
 ## Changelog
 
+### 8.1.2
+- Bump: Bump mockery/mockery (#49)
+
 ### 8.1.1
 - Fix: Removed Input facade (#41)
 
