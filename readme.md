@@ -79,6 +79,9 @@ Administrator is released under the MIT License. See the LICENSE file for detail
 
 ## Recent Changelog
 
+### 8.1.3
+- Fix: Fix broken version constraint (#50)
+
 ### 8.1.2
 - Bump: Bump mockery/mockery (#49)
 
