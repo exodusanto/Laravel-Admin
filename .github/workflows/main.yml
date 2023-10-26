@@ -16,7 +16,6 @@ jobs:
       matrix:
         operating-system: [ubuntu-latest]
         php-versions: [ '8.0','7.4','7.3' ]
-        dependency-stability: [ 'prefer-none' ]
 
         laravel: [ '8.*' ]
         include:
@@ -34,7 +33,7 @@ jobs:
     - name: Install Laravel Dependencies
       run: |
         composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-        composer update --${{ matrix.dependency-stability }} --prefer-dist --no-interaction --no-suggest
+        composer update --prefer-dist --no-interaction --no-suggest
 
     - name: Update Dependencies with latest stable
       if: matrix.dependency-stability == 'prefer-stable'
